@@ -25,16 +25,10 @@ class _SearchInputDataState extends State<SearchInputData> {
   final List<Map> _buildingDatas = BuildingData;
   List<Map> _foundDatas = [];
 
-  @override
-  void initState() {
-    _foundDatas = _buildingDatas;
-    super.initState();
-  }
-
   void _runFilter(String enteredKeyword) {
     List<Map> results = [];
     if (enteredKeyword.isEmpty) {
-      results = _buildingDatas;
+      _foundDatas.clear();
     } else {
       results = _buildingDatas
           .where(
@@ -56,61 +50,57 @@ class _SearchInputDataState extends State<SearchInputData> {
     _randomList.shuffle();
     var size = MediaQuery.of(context).size;
 
-    return Column(
-      children: [
-        SizedBox(
-          height: 60,
-          child: TextField(
-            onChanged: (value) => _runFilter(value),
-            cursorColor: Colors.black,
-            keyboardType: TextInputType.text,
-            decoration: const InputDecoration(
-              labelText: '  Search',
-              labelStyle: TextStyle(fontSize: 15),
-              hintText: '  (사무소명, 건물용도, 지역)',
-              hintStyle: TextStyle(color: Colors.black, fontSize: 15),
-              border: InputBorder.none,
-              suffixIcon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
+    // ignore: dead_code
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: TextField(
+          onSubmitted: (value) => _runFilter(value),
+          cursorColor: Colors.black,
+          keyboardType: TextInputType.text,
+          decoration: const InputDecoration(
+            labelText: '  Search',
+            labelStyle: TextStyle(fontSize: 15),
+            hintText: '  (사무소명, 건물용도, 지역)',
+            hintStyle: TextStyle(color: Colors.black, fontSize: 15),
+            border: InputBorder.none,
+            suffixIcon: Icon(
+              Icons.search,
+              color: Colors.black,
             ),
           ),
         ),
-        Expanded(
-          child: _foundDatas.isNotEmpty
-              ? SingleChildScrollView(
-                  scrollDirection: Axis.vertical,
-                  child: Wrap(
-                    spacing: 1,
-                    runSpacing: 1,
-                    children: List.generate(
-                      _foundDatas.length,
-                      (index) {
-                        return SizedBox(
-                          width: (size.width - 3) / 3,
-                          height: (size.width - 3) / 3,
-                          child: GestureDetector(
-                            onTap: () {
-                              _launchURL(_randomList[index]['project_link']);
-                            },
-                            child: SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.35,
-                              width: double.infinity,
-                              child: Image.network(
-                                _randomList[index]['image_link'],
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        );
-                      },
+      ),
+      body: SingleChildScrollView(
+        scrollDirection: Axis.vertical,
+        child: Wrap(
+          spacing: 1,
+          runSpacing: 1,
+          children: List.generate(
+            _foundDatas.length,
+            (index) {
+              return SizedBox(
+                width: (size.width - 3) / 3,
+                height: (size.width - 3) / 3,
+                child: GestureDetector(
+                  onTap: () {
+                    _launchURL(_randomList[index]['project_link']);
+                  },
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    width: double.infinity,
+                    child: Image.network(
+                      _randomList[index]['image_link'],
+                      fit: BoxFit.cover,
                     ),
                   ),
-                )
-              : const Text('결과 값이 없습니다.'),
+                ),
+              );
+            },
+          ),
         ),
-      ],
+      ),
     );
   }
 }
