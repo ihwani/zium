@@ -39,9 +39,11 @@ class _SearchInputDataState extends State<SearchInputData> {
           .toList();
     }
 
-    setState(() {
-      _foundDatas = results;
-    });
+    setState(
+      () {
+        _foundDatas = results;
+      },
+    );
   }
 
   @override
