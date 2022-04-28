@@ -112,6 +112,7 @@ class PostCard extends StatelessWidget {
                           } else {
                             _bookMark.add(_randomList[index]['project_id']);
                           }
+                          // ignore: avoid_print
                           print(_bookMark);
                           showDialog(
                               context: context,
@@ -139,15 +140,21 @@ class PostCard extends StatelessWidget {
                 ],
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 16.0),
-                child: SizedBox(
-                  height: 20,
-                  width: 300,
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                // ignore: sized_box_for_whitespace
+                child: Container(
+                  height: 30,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: _randomList[index]['tag'].length,
                     itemBuilder: (context, idx) {
-                      return Text('#' + _randomList[index]['tag'][idx] + " ");
+                      return TextButton(
+                          onPressed: () {
+                            Get.toNamed('/tag',
+                                arguments: _randomList[index]['tag'][idx]);
+                          },
+                          child: Text('# ' + _randomList[index]['tag'][idx]));
+                      // return Text('#' + _randomList[index]['tag'][idx] + " ");
                     },
                   ),
                 ),

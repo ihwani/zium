@@ -5,6 +5,7 @@ import 'package:zium/screens/office_screen.dart';
 import 'package:zium/screens/search_screen.dart';
 import 'package:zium/screens/support_screen.dart';
 import 'package:get/get.dart';
+import 'package:zium/screens/tag_screen.dart';
 
 void main() {
   runApp(
@@ -15,6 +16,7 @@ void main() {
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/support', page: () => const SupportScreen()),
         GetPage(name: '/office', page: () => const OfficeScreen()),
+        GetPage(name: '/tag', page: () => const TagScreen()),
       ],
       debugShowCheckedModeBanner: false,
       title: 'Zium',
