@@ -1,0 +1,13 @@
+C:/github/zium/build/windows/CMakeFiles/INSTALL.dir
+C:/github/zium/build/windows/CMakeFiles/ALL_BUILD.dir
+C:/github/zium/build/windows/CMakeFiles/ZERO_CHECK.dir
+C:/github/zium/build/windows/flutter/CMakeFiles/flutter_wrapper_plugin.dir
+C:/github/zium/build/windows/flutter/CMakeFiles/flutter_wrapper_app.dir
+C:/github/zium/build/windows/flutter/CMakeFiles/flutter_assemble.dir
+C:/github/zium/build/windows/flutter/CMakeFiles/INSTALL.dir
+C:/github/zium/build/windows/runner/CMakeFiles/zium.dir
+C:/github/zium/build/windows/runner/CMakeFiles/INSTALL.dir
+C:/github/zium/build/windows/runner/CMakeFiles/ALL_BUILD.dir
+C:/github/zium/build/windows/plugins/url_launcher_windows/CMakeFiles/url_launcher_windows_plugin.dir
+C:/github/zium/build/windows/plugins/url_launcher_windows/CMakeFiles/INSTALL.dir
+C:/github/zium/build/windows/plugins/url_launcher_windows/CMakeFiles/ALL_BUILD.dir
