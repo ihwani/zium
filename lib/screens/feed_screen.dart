@@ -64,7 +64,7 @@ class FeedScreen extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                 child: GestureDetector(
                   onTap: () {
-                    launchURL(postList[index]['project_link']);
+                    Get.toNamed("select", arguments: postList[index]);
                   },
                   child: SizedBox(
                     child: CachedNetworkImage(
@@ -126,19 +126,30 @@ class FeedScreen extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
-                // ignore: sized_box_for_whitespace
-                child: Container(
-                  height: 30,
+                child: SizedBox(
+                  height: 40,
                   child: ListView.builder(
                     scrollDirection: Axis.horizontal,
                     itemCount: postList[index]['tag'].length,
                     itemBuilder: (context, idx) {
-                      return TextButton(
+                      return Row(children: [
+                        TextButton(
+                          style: TextButton.styleFrom(
+                            backgroundColor: Colors.blue.shade50,
+                          ),
                           onPressed: () {
                             Get.toNamed('/tag',
                                 arguments: postList[index]['tag'][idx]);
                           },
-                          child: Text('# ' + postList[index]['tag'][idx]));
+                          child: Text(
+                            '# ' + postList[index]['tag'][idx],
+                            style: const TextStyle(color: Colors.black),
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 8,
+                        )
+                      ]);
                     },
                   ),
                 ),

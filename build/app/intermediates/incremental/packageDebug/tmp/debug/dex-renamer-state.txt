@@ -1,4 +1,4 @@
-#Wed Apr 27 18:10:51 KST 2022
-base.0=/Users/ihwani/Documents/GitHub/zium/build/app/intermediates/dex/debug/mergeDexDebug/classes.dex
+#Mon May 02 02:14:40 KST 2022
+base.0=C\:\\github\\zium\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
 renamed.0=classes.dex
 path.0=classes.dex

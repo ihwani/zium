@@ -1,18 +1,18 @@
 [
     {
-        "merged": "/Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/res/merged/debug/drawable/notification_icon_background.xml",
-        "source": "/Users/ihwani/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/res/drawable/notification_icon_background.xml"
+        "merged": "C:\\github\\zium\\build\\url_launcher_android\\intermediates\\merged_res\\debug\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\ihwan\\.gradle\\caches\\transforms-3\\d118b71b31ac2018b0687bad4db3eb97\\transformed\\core-1.6.0\\res\\drawable\\notification_bg.xml"
     },
     {
-        "merged": "/Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/res/merged/debug/drawable/notification_tile_bg.xml",
-        "source": "/Users/ihwani/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/res/drawable/notification_tile_bg.xml"
+        "merged": "C:\\github\\zium\\build\\url_launcher_android\\intermediates\\merged_res\\debug\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\ihwan\\.gradle\\caches\\transforms-3\\d118b71b31ac2018b0687bad4db3eb97\\transformed\\core-1.6.0\\res\\drawable\\notification_tile_bg.xml"
     },
     {
-        "merged": "/Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/res/merged/debug/drawable/notification_bg_low.xml",
-        "source": "/Users/ihwani/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/res/drawable/notification_bg_low.xml"
+        "merged": "C:\\github\\zium\\build\\url_launcher_android\\intermediates\\merged_res\\debug\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\ihwan\\.gradle\\caches\\transforms-3\\d118b71b31ac2018b0687bad4db3eb97\\transformed\\core-1.6.0\\res\\drawable\\notification_bg_low.xml"
     },
     {
-        "merged": "/Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/res/merged/debug/drawable/notification_bg.xml",
-        "source": "/Users/ihwani/.gradle/caches/transforms-2/files-2.1/122df2e57d294d1a53db26bbc3b813c1/core-1.6.0/res/drawable/notification_bg.xml"
+        "merged": "C:\\github\\zium\\build\\url_launcher_android\\intermediates\\merged_res\\debug\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\ihwan\\.gradle\\caches\\transforms-3\\d118b71b31ac2018b0687bad4db3eb97\\transformed\\core-1.6.0\\res\\drawable\\notification_icon_background.xml"
     }
 ]

@@ -22,7 +22,7 @@ void main() {
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/support', page: () => const SupportScreen()),
         GetPage(name: '/office', page: () => OfficeScreen()),
-        GetPage(name: '/tag', page: () => const TagScreen()),
+        GetPage(name: '/tag', page: () => TagScreen()),
         GetPage(name: '/bookmark', page: () => BookmarkScreen()),
       ],
       debugShowCheckedModeBanner: false,

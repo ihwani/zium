@@ -4,15 +4,15 @@ import 'package:get/get.dart';
 import 'package:zium/util/util.dart';
 
 class TagScreen extends StatelessWidget {
-  const TagScreen({Key? key}) : super(key: key);
+  TagScreen({Key? key}) : super(key: key);
+  final List<Map> foundList = postList
+      .where(
+        (element) => element.toString().contains(Get.arguments),
+      )
+      .toList();
 
   @override
   Widget build(BuildContext context) {
-    foundList = postList
-        .where(
-          (element) => element.toString().contains(Get.arguments),
-        )
-        .toList();
     foundList.shuffle();
 
     var size = MediaQuery.of(context).size;
@@ -23,7 +23,7 @@ class TagScreen extends StatelessWidget {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          '#' + Get.arguments,
+          '#' + Get.arguments.toString(),
           style: const TextStyle(color: Colors.black),
         ),
         actions: [

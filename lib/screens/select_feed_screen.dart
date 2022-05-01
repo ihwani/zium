@@ -131,19 +131,29 @@ class SelectFeedScreen extends StatelessWidget {
         ),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
-          // ignore: sized_box_for_whitespace
-          child: Container(
-            height: 30,
+          child: SizedBox(
+            height: 40,
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               itemCount: Get.arguments['tag'].length,
               itemBuilder: (context, idx) {
-                return TextButton(
+                return Row(children: [
+                  TextButton(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.blue.shade50,
+                    ),
                     onPressed: () {
                       Get.toNamed('/tag', arguments: Get.arguments['tag'][idx]);
                     },
-                    child: Text('# ' + Get.arguments['tag'][idx]));
-                // return Text('#' + Get.arguments['tag'][idx] + " ");
+                    child: Text(
+                      '# ' + Get.arguments['tag'][idx],
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 8,
+                  )
+                ]);
               },
             ),
           ),

@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:http/http.dart';
 import 'package:zium/util/util.dart';
 
 class OfficeScreen extends StatelessWidget {
@@ -63,7 +64,7 @@ class OfficeScreen extends StatelessWidget {
               },
               child: const Text(
                 '홈페이지로 이동하기',
-                style: TextStyle(color: Colors.black),
+                style: TextStyle(color: Colors.black, fontSize: 16),
               )),
           SingleChildScrollView(
             scrollDirection: Axis.vertical,
