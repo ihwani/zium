@@ -9,8 +9,8 @@ class Controller extends GetxController {
   final pageList = [
     const FeedScreen(),
     const SearchScreen(),
-    BookmarkScreen(),
+    const BookmarkScreen(),
     const SupportScreen(),
   ].obs;
-  var bookMark = [].obs;
+  RxList bookMark = [].obs;
 }

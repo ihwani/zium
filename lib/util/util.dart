@@ -2,7 +2,6 @@ import 'package:url_launcher/url_launcher.dart';
 
 List<Map> postList = [];
 List<Map> foundList = [];
-List<Map> bookMarkList = [];
 
 Future<void> launchURL(String url) async {
   await launch(

@@ -11,8 +11,12 @@ import 'package:get/get.dart';
 import 'package:zium/screens/tag_screen.dart';
 import 'package:zium/source_data/total_data.dart';
 import 'package:zium/util/util.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
-void main() {
+void main() async {
+  await Hive.initFlutter();
+  await Hive.openBox('SaveData');
   runApp(
     GetMaterialApp(
       initialRoute: '/',
@@ -27,30 +31,22 @@ void main() {
       ],
       debugShowCheckedModeBanner: false,
       title: 'Zium',
-      home: const MyApp(),
+      home: MyApp(),
     ),
   );
 }
 
-class MyApp extends StatefulWidget {
-  const MyApp({Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+class MyApp extends StatelessWidget {
+  MyApp({Key? key}) : super(key: key);
   final controller = Get.put(Controller());
 
   @override
-  void initState() {
-    super.initState();
+  Widget build(BuildContext context) {
     postList = BuildingData;
     postList.shuffle();
-  }
+    controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'));
+    controller.bookMark.shuffle();
 
-  @override
-  Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
@@ -102,17 +104,19 @@ class FeedScreen extends StatelessWidget {
                         () => IconButton(
                           onPressed: () {
                             if (controller.bookMark
+                                .toString()
                                 .contains(postList[index]['project_id'])) {
-                              controller.bookMark
-                                  .remove(postList[index]['project_id']);
-                              bookMarkList.remove(postList[index]);
+                              controller.bookMark.remove(postList[index]);
+                              Hive.box('SaveData')
+                                  .put('BookMark', controller.bookMark);
                             } else {
-                              controller.bookMark
-                                  .add(postList[index]['project_id']);
-                              bookMarkList.add(postList[index]);
+                              controller.bookMark.add(postList[index]);
+                              Hive.box('SaveData')
+                                  .put('BookMark', controller.bookMark);
                             }
                           },
                           icon: controller.bookMark
+                                  .toString()
                                   .contains(postList[index]['project_id'])
                               ? const Icon(Icons.bookmark, color: Colors.red)
                               : const Icon(

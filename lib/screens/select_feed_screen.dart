@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
@@ -109,15 +111,19 @@ class SelectFeedScreen extends StatelessWidget {
                   () => IconButton(
                     onPressed: () {
                       if (controller.bookMark
+                          .toString()
                           .contains(Get.arguments['project_id'])) {
-                        controller.bookMark.remove(Get.arguments['project_id']);
-                        bookMarkList.remove(Get.arguments);
+                        controller.bookMark.remove(Get.arguments);
+                        Hive.box('SaveData')
+                            .put('BookMark', controller.bookMark);
                       } else {
-                        controller.bookMark.add(Get.arguments['project_id']);
-                        bookMarkList.add(Get.arguments);
+                        controller.bookMark.add(Get.arguments);
+                        Hive.box('SaveData')
+                            .put('BookMark', controller.bookMark);
                       }
                     },
                     icon: controller.bookMark
+                            .toString()
                             .contains(Get.arguments['project_id'])
                         ? const Icon(Icons.bookmark, color: Colors.red)
                         : const Icon(
