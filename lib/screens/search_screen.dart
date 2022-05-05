@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -11,12 +12,13 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  final controller = Get.put(Controller());
   void _runFilter(String enteredKeyword) {
-    List<Map> results = [];
+    List results = [];
     if (enteredKeyword.isEmpty) {
       foundList.clear();
     } else {
-      results = postList
+      results = controller.postList
           .where(
             (element) => element.toString().contains(
                   enteredKeyword,

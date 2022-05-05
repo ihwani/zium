@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/inputdata/bottom_navigation.dart';
 import 'package:zium/screens/bookmark_screen.dart';
@@ -11,8 +10,8 @@ import 'package:zium/screens/support_screen.dart';
 import 'package:get/get.dart';
 import 'package:zium/screens/tag_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:zium/source_data/total_data.dart';
-import 'package:zium/util/util.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() async {
   await Hive.initFlutter();
@@ -25,8 +24,8 @@ void main() async {
         GetPage(name: '/select', page: () => const SelectFeedScreen()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/support', page: () => const SupportScreen()),
-        GetPage(name: '/office', page: () => OfficeScreen()),
-        GetPage(name: '/tag', page: () => TagScreen()),
+        GetPage(name: '/office', page: () => const OfficeScreen()),
+        GetPage(name: '/tag', page: () => const TagScreen()),
         GetPage(name: '/bookmark', page: () => const BookmarkScreen()),
       ],
       debugShowCheckedModeBanner: false,
@@ -40,9 +39,17 @@ class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final controller = Get.put(Controller());
 
+  getData() async {
+    var result = await http.get(Uri.parse(
+        'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json'));
+    List results = jsonDecode(result.body);
+    controller.postList.addAll(results);
+    controller.postList.shuffle();
+  }
+
   @override
   Widget build(BuildContext context) {
-    postList = BuildingData;
+    getData();
     Hive.box('SaveData').get('BookMark').length > 0
         ? controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'))
         : controller.bookMark.clear();

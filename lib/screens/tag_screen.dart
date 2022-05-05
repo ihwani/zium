@@ -1,18 +1,20 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:zium/util/util.dart';
+import 'package:zium/getx/getx_controller.dart';
 
 class TagScreen extends StatelessWidget {
-  TagScreen({Key? key}) : super(key: key);
-  final List foundList = postList
-      .where(
-        (element) => element.toString().contains(Get.arguments),
-      )
-      .toList();
+  const TagScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(Controller());
+    final List foundList = controller.postList
+        .where(
+          (element) => element.toString().contains(Get.arguments),
+        )
+        .toList();
+
     foundList.shuffle();
 
     var size = MediaQuery.of(context).size;

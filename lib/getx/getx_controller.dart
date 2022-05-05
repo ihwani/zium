@@ -13,4 +13,6 @@ class Controller extends GetxController {
     const SupportScreen(),
   ].obs;
   RxList bookMark = [].obs;
+  RxList postList = [].obs;
+  RxList bookMarkList = [].obs;
 }
