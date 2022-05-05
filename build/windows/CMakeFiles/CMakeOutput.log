@@ -9,7 +9,7 @@ The output was:
 .NET Framework용 Microsoft (R) Build Engine 버전 17.1.0+ae57d105c
 Copyright (C) Microsoft Corporation. All rights reserved.
 
-빌드 시작: 2022-05-05 오전 4:01:46
+빌드 시작: 2022-05-06 오전 12:17:30
 1 노드의 "C:\github\zium\build\windows\CMakeFiles\3.22.22022201-MSVC_2\CompilerIdCXX\CompilerIdCXX.vcxproj" 프로젝트(기본 대상)입니다.
 PrepareForBuild:
   "Debug\" 디렉터리를 만들고 있습니다.
@@ -35,7 +35,7 @@ FinalizeBuildStatus:
     경고 0개
     오류 0개
 
-경과 시간: 00:00:00.95
+경과 시간: 00:00:00.67
 
 
 Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "CompilerIdCXX.exe"
@@ -47,14 +47,14 @@ The CXX compiler identification is MSVC, found in "C:/github/zium/build/windows/
 Detecting CXX compiler ABI info compiled with the following output:
 Change Dir: C:/github/zium/build/windows/CMakeFiles/CMakeTmp
 
-Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_36cac.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && .NET Framework용 Microsoft (R) Build Engine 버전 17.1.0+ae57d105c
+Run Build Command(s):C:/Program Files/Microsoft Visual Studio/2022/Community/MSBuild/Current/Bin/amd64/MSBuild.exe cmTC_1c359.vcxproj /p:Configuration=Debug /p:Platform=x64 /p:VisualStudioVersion=17.0 /v:m && .NET Framework용 Microsoft (R) Build Engine 버전 17.1.0+ae57d105c
 Copyright (C) Microsoft Corporation. All rights reserved.
 
   Microsoft (R) C/C++ 최적화 컴파일러 버전 19.31.31105(x64)
   CMakeCXXCompilerABI.cpp
   Copyright (c) Microsoft Corporation. All rights reserved.
-  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_36cac.dir\Debug\\" /Fd"cmTC_36cac.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCXXCompilerABI.cpp"
-  cmTC_36cac.vcxproj -> C:\github\zium\build\windows\CMakeFiles\CMakeTmp\Debug\cmTC_36cac.exe
+  cl /c /Zi /W3 /WX- /diagnostics:column /Od /Ob0 /D _MBCS /D WIN32 /D _WINDOWS /D "CMAKE_INTDIR=\"Debug\"" /Gm- /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /GR /Fo"cmTC_1c359.dir\Debug\\" /Fd"cmTC_1c359.dir\Debug\vc143.pdb" /external:W3 /Gd /TP /errorReport:queue "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\share\cmake-3.22\Modules\CMakeCXXCompilerABI.cpp"
+  cmTC_1c359.vcxproj -> C:\github\zium\build\windows\CMakeFiles\CMakeTmp\Debug\cmTC_1c359.exe
 
 
 
