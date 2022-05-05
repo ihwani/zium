@@ -11,6 +11,7 @@ class SupportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(Controller());
+    final resetList = [];
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -60,6 +61,10 @@ class SupportScreen extends StatelessWidget {
           TextButton(
               onPressed: () {
                 Hive.box('SaveData').clear();
+                Hive.box('SaveData').put('BookMark', resetList);
+                controller.bookMark.clear();
+                print(controller.bookMark);
+                print(Hive.box('SaveData').get('BookMark'));
               },
               child: const Text('데이터 삭제'))
         ],

@@ -112,7 +112,7 @@ class SelectFeedScreen extends StatelessWidget {
                     onPressed: () {
                       if (controller.bookMark
                           .toString()
-                          .contains(Get.arguments['project_id'])) {
+                          .contains(Get.arguments['id'])) {
                         controller.bookMark.remove(Get.arguments);
                         Hive.box('SaveData')
                             .put('BookMark', controller.bookMark);
@@ -124,7 +124,7 @@ class SelectFeedScreen extends StatelessWidget {
                     },
                     icon: controller.bookMark
                             .toString()
-                            .contains(Get.arguments['project_id'])
+                            .contains(Get.arguments['id'])
                         ? const Icon(Icons.bookmark, color: Colors.red)
                         : const Icon(
                             Icons.bookmark_border,

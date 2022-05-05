@@ -105,8 +105,9 @@ class FeedScreen extends StatelessWidget {
                         child: Obx(
                           () => IconButton(
                             onPressed: () {
-                              if (controller.bookMark.toString().contains(
-                                  controller.postList[index]['project_id'])) {
+                              if (controller.bookMark
+                                  .toString()
+                                  .contains(controller.postList[index]['id'])) {
                                 controller.bookMark
                                     .remove(controller.postList[index]);
                                 Hive.box('SaveData')
@@ -118,8 +119,9 @@ class FeedScreen extends StatelessWidget {
                                     .put('BookMark', controller.bookMark);
                               }
                             },
-                            icon: controller.bookMark.toString().contains(
-                                    controller.postList[index]['project_id'])
+                            icon: controller.bookMark
+                                    .toString()
+                                    .contains(controller.postList[index]['id'])
                                 ? const Icon(Icons.bookmark, color: Colors.red)
                                 : const Icon(
                                     Icons.bookmark_border,

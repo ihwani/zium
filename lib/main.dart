@@ -52,9 +52,10 @@ class MyApp extends StatelessWidget {
     getData();
     Hive.box('SaveData').get('BookMark').length > 0
         ? controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'))
-        : controller.bookMark.clear();
+        : null;
+    print(Hive.box('SaveData').get('BookMark').runtimeType);
+    print(Hive.box('SaveData').get('BookMark'));
     controller.bookMark.shuffle();
-
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,

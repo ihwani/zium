@@ -14,5 +14,4 @@ class Controller extends GetxController {
   ].obs;
   RxList bookMark = [].obs;
   RxList postList = [].obs;
-  RxList bookMarkList = [].obs;
 }
