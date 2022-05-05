@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/inputdata/bottom_navigation.dart';
 import 'package:zium/screens/bookmark_screen.dart';
@@ -9,10 +10,9 @@ import 'package:zium/screens/select_feed_screen.dart';
 import 'package:zium/screens/support_screen.dart';
 import 'package:get/get.dart';
 import 'package:zium/screens/tag_screen.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/source_data/total_data.dart';
 import 'package:zium/util/util.dart';
-import 'package:hive_flutter/hive_flutter.dart';
-import 'package:hive/hive.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -27,7 +27,7 @@ void main() async {
         GetPage(name: '/support', page: () => const SupportScreen()),
         GetPage(name: '/office', page: () => OfficeScreen()),
         GetPage(name: '/tag', page: () => TagScreen()),
-        GetPage(name: '/bookmark', page: () => BookmarkScreen()),
+        GetPage(name: '/bookmark', page: () => const BookmarkScreen()),
       ],
       debugShowCheckedModeBanner: false,
       title: 'Zium',
@@ -43,8 +43,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     postList = BuildingData;
-    postList.shuffle();
-    controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'));
+    Hive.box('SaveData').get('BookMark').length > 0
+        ? controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'))
+        : controller.bookMark.clear();
     controller.bookMark.shuffle();
 
     return Scaffold(

@@ -5,7 +5,7 @@ import 'package:zium/util/util.dart';
 
 class OfficeScreen extends StatelessWidget {
   OfficeScreen({Key? key}) : super(key: key);
-  final List<Map> foundList = postList
+  final List foundList = postList
       .where(
         (element) =>
             element.toString().contains(Get.arguments['design_office']),
