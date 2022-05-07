@@ -52,7 +52,8 @@ class FeedScreen extends StatelessWidget {
                           child: TextButton(
                             onPressed: () {
                               Get.toNamed("/office",
-                                  arguments: controller.postList[index]);
+                                  arguments: controller.postList[index]
+                                      ['office_id']);
                             },
                             child: Text(
                               controller.postList[index]['design_office'],
@@ -118,12 +119,12 @@ class FeedScreen extends StatelessWidget {
                                     controller.postList[index]['id'])) {
                                   controller.bookMark
                                       .remove(controller.postList[index]);
-                                  Hive.box('SaveData')
+                                  Hive.box('BookMark')
                                       .put('BookMark', controller.bookMark);
                                 } else {
                                   controller.bookMark
                                       .add(controller.postList[index]);
-                                  Hive.box('SaveData')
+                                  Hive.box('BookMark')
                                       .put('BookMark', controller.bookMark);
                                 }
                               },
@@ -176,6 +177,9 @@ class FeedScreen extends StatelessWidget {
                   const SizedBox(
                     height: 16,
                   ),
+                  const Divider(
+                    height: 16,
+                  )
                 ],
               );
             }),

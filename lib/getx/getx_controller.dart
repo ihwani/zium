@@ -13,5 +13,6 @@ class Controller extends GetxController {
     const SupportScreen(),
   ].obs;
   RxList bookMark = [].obs;
+  RxMap favorite = {}.obs;
   RxList postList = [].obs;
 }

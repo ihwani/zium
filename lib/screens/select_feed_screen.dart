@@ -21,7 +21,7 @@ class SelectFeedScreen extends StatelessWidget {
         title: Row(
           children: [
             CircleAvatar(
-              radius: 16,
+              radius: 20,
               backgroundColor: Colors.white,
               child: CachedNetworkImage(
                 imageUrl: Get.arguments['ic_link'],
@@ -34,14 +34,14 @@ class SelectFeedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: TextButton(
                 onPressed: () {
-                  Get.toNamed("/office", arguments: Get.arguments);
+                  Get.toNamed("/office", arguments: Get.arguments['office_id']);
                 },
                 child: Text(
                   Get.arguments['design_office'],
                   style: const TextStyle(
                       color: Colors.black,
                       fontWeight: FontWeight.bold,
-                      fontSize: 16),
+                      fontSize: 20),
                 ),
               ),
             ),
@@ -114,11 +114,11 @@ class SelectFeedScreen extends StatelessWidget {
                           .toString()
                           .contains(Get.arguments['id'])) {
                         controller.bookMark.remove(Get.arguments);
-                        Hive.box('SaveData')
+                        Hive.box('BookMark')
                             .put('BookMark', controller.bookMark);
                       } else {
                         controller.bookMark.add(Get.arguments);
-                        Hive.box('SaveData')
+                        Hive.box('BookMark')
                             .put('BookMark', controller.bookMark);
                       }
                     },

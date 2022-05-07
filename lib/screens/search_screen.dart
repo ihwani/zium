@@ -83,8 +83,9 @@ class _SearchScreenState extends State<SearchScreen> {
                         width: double.infinity,
                         fit: BoxFit.cover,
                         imageUrl: foundList[index]['image_link'],
-                        placeholder: (context, url) =>
-                            const CircularProgressIndicator(),
+                        placeholder: (context, url) => const Center(
+                            heightFactor: 30,
+                            child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) =>
                             const Icon(Icons.error),
                       ),

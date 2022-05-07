@@ -18,7 +18,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
-  await Hive.openBox('SaveData');
+  await Hive.openBox('BookMark');
+  await Hive.openBox('Favorite');
   runApp(
     GetMaterialApp(
       initialRoute: '/',
@@ -51,14 +52,24 @@ class MyApp extends StatelessWidget {
     controller.postList.shuffle();
   }
 
+  getSaveDataList(a, b) {
+    Hive.box(a).get(a).runtimeType == Null
+        ? b.clear()
+        : b.addAll(Hive.box(a).get(a));
+    b.shuffle();
+  }
+
+  getSaveDataMap(a, b) {
+    Hive.box(a).get(a).runtimeType == Null
+        ? b.clear()
+        : b.addAll(Hive.box(a).get(a));
+  }
+
   @override
   Widget build(BuildContext context) {
     getData();
-    Hive.box('SaveData').get('BookMark').runtimeType == Null
-        ? null
-        : controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'));
-    controller.bookMark.shuffle();
-
+    getSaveDataList('BookMark', controller.bookMark);
+    getSaveDataMap('Favorite', controller.favorite);
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,
