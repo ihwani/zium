@@ -78,7 +78,7 @@ class FeedScreen extends StatelessWidget {
                         child: CachedNetworkImage(
                           height: MediaQuery.of(context).size.height * 0.35,
                           width: double.infinity,
-                          fit: BoxFit.cover,
+                          fit: BoxFit.contain,
                           imageUrl: controller.postList[index]['image_link'],
                           placeholder: (context, url) => const Center(
                             heightFactor: 30,

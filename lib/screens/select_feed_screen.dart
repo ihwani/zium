@@ -80,7 +80,7 @@ class SelectFeedScreen extends StatelessWidget {
               child: CachedNetworkImage(
                 height: MediaQuery.of(context).size.height * 0.35,
                 width: double.infinity,
-                fit: BoxFit.cover,
+                fit: BoxFit.contain,
                 imageUrl: Get.arguments['image_link'],
                 placeholder: (context, url) =>
                     const CircularProgressIndicator(),

@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.zium">
    <application
-        android:label="zium"
+        android:label="지음"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
