@@ -57,12 +57,18 @@ class SupportScreen extends StatelessWidget {
               Text('E-mail: thezium@icloud.com', style: TextStyle(fontSize: 15))
             ],
           ),
+          const SizedBox(
+            height: 8,
+          ),
           TextButton(
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.blue.shade50,
+              ),
               onPressed: () {
                 Hive.box('SaveData').clear();
                 controller.bookMark.clear();
               },
-              child: const Text('데이터 삭제'))
+              child: const Text('북마크 전체 삭제'))
         ],
       ),
     );
