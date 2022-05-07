@@ -65,9 +65,68 @@ class SupportScreen extends StatelessWidget {
                 backgroundColor: Colors.blue.shade50,
               ),
               onPressed: () {
-                Hive.box('SaveData').clear();
-                controller.bookMark.clear();
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: SizedBox(
+                      height: 100,
+                      width: 300,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text(
+                            "북마크를 전부 삭제하시겠습니까?",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Cancel")),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              TextButton(
+                                  onPressed: () {
+                                    Hive.box('SaveData').clear();
+                                    controller.bookMark.clear();
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("Ok"))
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                );
               },
+              //   AlertDialog(
+              //     title: const Text("북마크 전체 삭제"),
+              //     content: const Text("북마크를 전부 삭제하겠습니까?"),
+              //     actions: [
+              //       TextButton(
+              //           onPressed: () {
+              //             Hive.box('SaveData').clear();
+              //             controller.bookMark.clear();
+              //           },
+              //           child: const Text("Ok")),
+              //       TextButton(
+              //           onPressed: () {
+              //             Navigator.of(context).pop();
+              //           },
+              //           child: const Text("Cancel"))
+              //     ],
+              //   );
+              // },
               child: const Text('북마크 전체 삭제'))
         ],
       ),

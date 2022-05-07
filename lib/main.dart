@@ -12,8 +12,11 @@ import 'package:zium/screens/tag_screen.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter/services.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   await Hive.initFlutter();
   await Hive.openBox('SaveData');
   runApp(
@@ -35,15 +38,16 @@ void main() async {
   );
 }
 
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final controller = Get.put(Controller());
 
   getData() async {
-    var result = await http.get(Uri.parse(
+    var _result = await http.get(Uri.parse(
         'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json'));
-    List results = jsonDecode(result.body);
-    controller.postList.addAll(results);
+    List _results = jsonDecode(_result.body);
+    controller.postList.addAll(_results);
     controller.postList.shuffle();
   }
 
@@ -54,6 +58,7 @@ class MyApp extends StatelessWidget {
         ? null
         : controller.bookMark.addAll(Hive.box('SaveData').get('BookMark'));
     controller.bookMark.shuffle();
+
     return Scaffold(
         appBar: AppBar(
           centerTitle: false,

@@ -10,14 +10,14 @@ class OfficeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(Controller());
-    final List foundList = controller.postList
+    final List _foundList = controller.postList
         .where(
           (element) =>
               element.toString().contains(Get.arguments['design_office']),
         )
         .toList();
 
-    foundList.shuffle();
+    _foundList.shuffle();
 
     var size = MediaQuery.of(context).size;
 
@@ -48,56 +48,60 @@ class OfficeScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(right: 8),
             child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: const Icon(
-                  Icons.close,
-                  color: Colors.black,
-                )),
-          )
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.close,
+                color: Colors.black,
+              ),
+            ),
+          ),
         ],
       ),
       body: Column(
         children: [
           TextButton(
-              onPressed: () {
-                launchURL(Get.arguments['homepage_link']);
-              },
-              child: const Text(
-                '홈페이지로 이동하기',
-                style: TextStyle(color: Colors.black, fontSize: 16),
-              )),
-          SingleChildScrollView(
-            scrollDirection: Axis.vertical,
-            child: Wrap(
-              spacing: 1,
-              runSpacing: 1,
-              children: List.generate(
-                foundList.length,
-                (index) {
-                  return SizedBox(
-                    width: (size.width - 3) / 3,
-                    height: (size.width - 3) / 3,
-                    child: GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/select', arguments: foundList[index]);
-                      },
-                      child: SizedBox(
-                        child: CachedNetworkImage(
-                          height: MediaQuery.of(context).size.height * 0.35,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                          imageUrl: foundList[index]['image_link'],
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+            onPressed: () {
+              launchURL(Get.arguments['homepage_link']);
+            },
+            child: const Text(
+              '홈페이지로 이동하기',
+              style: TextStyle(color: Colors.black, fontSize: 16),
+            ),
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              scrollDirection: Axis.vertical,
+              child: Wrap(
+                spacing: 1,
+                runSpacing: 1,
+                children: List.generate(
+                  _foundList.length,
+                  (index) {
+                    return SizedBox(
+                      width: (size.width - 3) / 3,
+                      height: (size.width - 3) / 3,
+                      child: GestureDetector(
+                        onTap: () {
+                          Get.toNamed('/select', arguments: _foundList[index]);
+                        },
+                        child: SizedBox(
+                          child: CachedNetworkImage(
+                            height: MediaQuery.of(context).size.height * 0.35,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                            imageUrl: _foundList[index]['image_link'],
+                            placeholder: (context, url) =>
+                                const CircularProgressIndicator(),
+                            errorWidget: (context, url, error) =>
+                                const Icon(Icons.error),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ),

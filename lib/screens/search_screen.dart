@@ -14,11 +14,10 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   final controller = Get.put(Controller());
   void _runFilter(String enteredKeyword) {
-    List results = [];
     if (enteredKeyword.isEmpty) {
       foundList.clear();
     } else {
-      results = controller.postList
+      foundList = controller.postList
           .where(
             (element) => element.toString().contains(
                   enteredKeyword,
@@ -29,7 +28,6 @@ class _SearchScreenState extends State<SearchScreen> {
 
     setState(
       () {
-        foundList = results;
         foundList.shuffle();
       },
     );
@@ -62,36 +60,39 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Wrap(
-          spacing: 1,
-          runSpacing: 1,
-          children: List.generate(
-            foundList.length,
-            (index) {
-              return SizedBox(
-                width: (size.width - 3) / 3,
-                height: (size.width - 3) / 3,
-                child: GestureDetector(
-                  onTap: () {
-                    Get.toNamed('/select', arguments: foundList[index]);
-                  },
-                  child: SizedBox(
-                    child: CachedNetworkImage(
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      imageUrl: foundList[index]['image_link'],
-                      placeholder: (context, url) =>
-                          const CircularProgressIndicator(),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
+      body: RefreshIndicator(
+        onRefresh: () => onRefresh(foundList),
+        child: SingleChildScrollView(
+          scrollDirection: Axis.vertical,
+          child: Wrap(
+            spacing: 1,
+            runSpacing: 1,
+            children: List.generate(
+              foundList.length,
+              (index) {
+                return SizedBox(
+                  width: (size.width - 3) / 3,
+                  height: (size.width - 3) / 3,
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/select', arguments: foundList[index]);
+                    },
+                    child: SizedBox(
+                      child: CachedNetworkImage(
+                        height: MediaQuery.of(context).size.height * 0.35,
+                        width: double.infinity,
+                        fit: BoxFit.cover,
+                        imageUrl: foundList[index]['image_link'],
+                        placeholder: (context, url) =>
+                            const CircularProgressIndicator(),
+                        errorWidget: (context, url, error) =>
+                            const Icon(Icons.error),
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ),
