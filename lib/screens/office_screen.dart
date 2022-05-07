@@ -64,6 +64,9 @@ class OfficeScreen extends StatelessWidget {
       ),
       body: Column(
         children: [
+          const SizedBox(
+            height: 16,
+          ),
           Row(children: [
             Padding(
               padding: const EdgeInsets.only(left: 16),
@@ -80,32 +83,41 @@ class OfficeScreen extends StatelessWidget {
             Obx(
               () => Expanded(
                 child: Align(
-                  alignment: Alignment.bottomRight,
-                  child: IconButton(
-                    onPressed: () {
-                      List result = [];
-                      result.addAll(controller.favorite.keys);
-                      if (result.contains(Get.arguments)) {
-                        controller.favorite.remove(Get.arguments);
-                        Hive.box('Favorite')
-                            .put('Favorite', controller.favorite);
-                      } else {
-                        controller.favorite[Get.arguments] =
-                            _foundList[0]['ic_link'];
-                        Hive.box('Favorite')
-                            .put('Favorite', controller.favorite);
-                      }
-                    },
-                    icon: controller.favorite.toString().contains(Get.arguments)
-                        ? const Icon(Icons.star, color: Colors.red)
-                        : const Icon(
-                            Icons.star_border,
-                          ),
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 8),
+                    child: IconButton(
+                      onPressed: () {
+                        List result = [];
+                        result.addAll(controller.favorite.keys);
+                        if (result.contains(Get.arguments)) {
+                          controller.favorite.remove(Get.arguments);
+                          Hive.box('Favorite')
+                              .put('Favorite', controller.favorite);
+                        } else {
+                          controller.favorite[Get.arguments] =
+                              _foundList[0]['ic_link'];
+                          Hive.box('Favorite')
+                              .put('Favorite', controller.favorite);
+                        }
+                        controller.keyList.clear();
+                        controller.keyList.addAll(controller.favorite.keys);
+                      },
+                      icon:
+                          controller.favorite.toString().contains(Get.arguments)
+                              ? const Icon(Icons.star, color: Colors.red)
+                              : const Icon(
+                                  Icons.star_border,
+                                ),
+                    ),
                   ),
                 ),
               ),
             ),
           ]),
+          const SizedBox(
+            height: 16,
+          ),
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,

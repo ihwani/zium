@@ -259,6 +259,7 @@ class SupportScreen extends StatelessWidget {
                             TextButton(
                               onPressed: () {
                                 Hive.box('Favorite').delete('Favorite');
+                                controller.keyList.clear();
                                 controller.favorite.clear();
                                 Navigator.pop(context);
                               },

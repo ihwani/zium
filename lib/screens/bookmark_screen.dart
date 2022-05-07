@@ -11,10 +11,8 @@ class BookmarkScreen extends StatelessWidget {
     final controller = Get.put(Controller());
 
     var size = MediaQuery.of(context).size;
-    List _valueList = [];
-    List _keyList = [];
-    _valueList.addAll(controller.favorite.values);
-    _keyList.addAll(controller.favorite.keys);
+    controller.keyList.clear();
+    controller.keyList.addAll(controller.favorite.keys);
 
     return Scaffold(
       body: Column(
@@ -42,32 +40,41 @@ class BookmarkScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(left: 10),
-            child: SizedBox(
-              height: 50,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: controller.favorite.length,
-                itemBuilder: ((context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Get.toNamed('/office', arguments: _keyList[index]);
-                    },
-                    child: SizedBox(
-                      width: 50,
-                      child: CircleAvatar(
-                        radius: 30,
-                        backgroundColor: Colors.white,
-                        child: CachedNetworkImage(
-                          imageUrl: _valueList[index],
-                          placeholder: (context, url) =>
-                              const CircularProgressIndicator(),
-                          errorWidget: (context, url, error) =>
-                              const Icon(Icons.error),
+            child: Obx(
+              () => SizedBox(
+                height: 50,
+                child: ListView.builder(
+                  scrollDirection: Axis.horizontal,
+                  itemCount: controller.favorite.length,
+                  itemBuilder: ((context, index) {
+                    return Row(children: [
+                      GestureDetector(
+                        onTap: () {
+                          Get.toNamed('/office',
+                              arguments: controller.keyList[index]);
+                        },
+                        child: SizedBox(
+                          width: 50,
+                          child: CircleAvatar(
+                            radius: 30,
+                            backgroundColor: Colors.white,
+                            child: CachedNetworkImage(
+                              imageUrl: controller
+                                  .favorite[controller.keyList[index]],
+                              placeholder: (context, url) =>
+                                  const CircularProgressIndicator(),
+                              errorWidget: (context, url, error) =>
+                                  const Icon(Icons.error),
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                }),
+                      const SizedBox(
+                        width: 8,
+                      )
+                    ]);
+                  }),
+                ),
               ),
             ),
           ),

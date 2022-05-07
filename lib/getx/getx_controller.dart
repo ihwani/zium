@@ -15,4 +15,5 @@ class Controller extends GetxController {
   RxList bookMark = [].obs;
   RxMap favorite = {}.obs;
   RxList postList = [].obs;
+  RxList keyList = [].obs;
 }
