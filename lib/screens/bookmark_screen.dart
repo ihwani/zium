@@ -31,7 +31,7 @@ class BookmarkScreen extends StatelessWidget {
                   builder: (context) => Dialog(
                     child: SizedBox(
                       height: 100,
-                      width: 300,
+                      width: 320,
                       child: Column(
                         children: [
                           const SizedBox(
@@ -131,7 +131,7 @@ class BookmarkScreen extends StatelessWidget {
                   builder: (context) => Dialog(
                     child: SizedBox(
                       height: 100,
-                      width: 300,
+                      width: 320,
                       child: Column(
                         children: [
                           const SizedBox(

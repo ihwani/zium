@@ -41,4 +41,5 @@ getSearch(c, s) {
         (element) => element.toString().contains(s),
       )
       .toList();
+  foundList.shuffle();
 }

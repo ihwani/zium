@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:get/get.dart';
+import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
 class SupportScreen extends StatelessWidget {
@@ -7,6 +9,8 @@ class SupportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(Controller());
+
     void _sendEmail() async {
       final Email email = Email(
         subject: '[지음 문의 및 피드백]',
@@ -133,6 +137,15 @@ class SupportScreen extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: 24,
+          ),
+          Obx(
+            () => Text(
+              "${controller.postList.length}개의 DB가 로드되었습니다.",
+              style: TextStyle(color: Colors.grey[300]),
+            ),
+          )
         ],
       ),
     );

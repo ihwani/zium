@@ -17,8 +17,6 @@ class OfficeScreen extends StatelessWidget {
     );
     getSearch(controller.postList, Get.arguments);
 
-    foundList.shuffle();
-
     var size = MediaQuery.of(context).size;
 
     void _sendEmail() async {
@@ -193,14 +191,12 @@ class OfficeScreen extends StatelessWidget {
               ),
               accountEmail: null,
               currentAccountPicture: CircleAvatar(
-                radius: 20,
+                radius: 30,
                 backgroundColor: Colors.white,
                 child: CachedNetworkImage(
                   imageUrl: foundList[0]['ic_link'],
-                  placeholder: (context, url) => const Center(
-                    heightFactor: 30,
-                    child: CircularProgressIndicator(),
-                  ),
+                  placeholder: (context, url) =>
+                      const CircularProgressIndicator(),
                   errorWidget: (context, url, error) => const Icon(Icons.error),
                 ),
               ),

@@ -14,8 +14,6 @@ class TagScreen extends StatelessWidget {
     );
     getSearch(controller.postList, Get.arguments);
 
-    foundList.shuffle();
-
     var size = MediaQuery.of(context).size;
 
     return Scaffold(

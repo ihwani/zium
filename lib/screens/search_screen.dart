@@ -16,14 +16,19 @@ class _SearchScreenState extends State<SearchScreen> {
   //검색 함수
   void _runFilter(String enteredKeyword) {
     if (enteredKeyword.isEmpty) {
-      foundList.clear();
+      keywordList.clear();
     } else {
-      getSearch(controller.postList, enteredKeyword);
+      keywordList = controller.postList
+          .where(
+            (element) => element.toString().contains(enteredKeyword),
+          )
+          .toList();
+      keywordList.shuffle();
     }
 
     setState(
       () {
-        foundList.shuffle();
+        keywordList.shuffle();
       },
     );
   }
@@ -63,21 +68,21 @@ class _SearchScreenState extends State<SearchScreen> {
           spacing: 1,
           runSpacing: 1,
           children: List.generate(
-            foundList.length,
+            keywordList.length,
             (index) {
               return SizedBox(
                 width: (size.width - 3) / 3,
                 height: (size.width - 3) / 3,
                 child: GestureDetector(
                   onTap: () {
-                    Get.toNamed('/select', arguments: foundList[index]);
+                    Get.toNamed('/select', arguments: keywordList[index]);
                   },
                   child: SizedBox(
                     child: CachedNetworkImage(
                       height: MediaQuery.of(context).size.height * 0.35,
                       width: double.infinity,
                       fit: BoxFit.cover,
-                      imageUrl: foundList[index]['image_link'],
+                      imageUrl: keywordList[index]['image_link'],
                       placeholder: (context, url) => const Center(
                           heightFactor: 30, child: CircularProgressIndicator()),
                       errorWidget: (context, url, error) =>
