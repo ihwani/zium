@@ -13,6 +13,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart';
+import 'package:zium/util/util.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final controller = Get.put(Controller());
 
+//서버db 로드
   getData() async {
     var _result = await http.get(Uri.parse(
         'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json'));
@@ -52,42 +54,30 @@ class MyApp extends StatelessWidget {
     controller.postList.shuffle();
   }
 
-  getSaveDataList(a, b) {
-    Hive.box(a).get(a).runtimeType == Null
-        ? b.clear()
-        : b.addAll(Hive.box(a).get(a));
-    b.shuffle();
-  }
-
-  getSaveDataMap(a, b) {
-    Hive.box(a).get(a).runtimeType == Null
-        ? b.clear()
-        : b.addAll(Hive.box(a).get(a));
-  }
-
   @override
   Widget build(BuildContext context) {
     getData();
-    getSaveDataList('BookMark', controller.bookMark);
-    getSaveDataMap('Favorite', controller.favorite);
+    getSaveData('BookMark', controller.bookMark);
+    getSaveData('Favorite', controller.favorite);
     return Scaffold(
-        appBar: AppBar(
-          centerTitle: false,
-          backgroundColor: Colors.white,
-          elevation: 0,
-          title: const Padding(
-            padding: EdgeInsets.all(8.0),
-            child: Text(
-              'Zium',
-              style: TextStyle(
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
-                fontSize: 32,
-              ),
+      appBar: AppBar(
+        centerTitle: false,
+        backgroundColor: Colors.white,
+        elevation: 0,
+        title: const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Text(
+            'Zium',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 32,
             ),
           ),
         ),
-        body: Obx(() => controller.pageList[controller.currentIndex.value]),
-        bottomNavigationBar: const BottomNavigation());
+      ),
+      body: Obx(() => controller.pageList[controller.currentIndex.value]),
+      bottomNavigationBar: const BottomNavigation(),
+    );
   }
 }

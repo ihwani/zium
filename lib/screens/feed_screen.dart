@@ -90,57 +90,52 @@ class FeedScreen extends StatelessWidget {
                       ),
                     ),
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 10.0),
-                        child: Row(
-                          children: [
-                            const Icon(Icons.location_on),
-                            Text(controller.postList[index]['location'])
-                          ],
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16.0),
+                    child: Row(
+                      children: [
+                        const Icon(Icons.location_on),
+                        const SizedBox(
+                          width: 8,
                         ),
-                      ),
-                    ],
+                        Text(controller.postList[index]['location'])
+                      ],
+                    ),
                   ),
-                  Row(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0),
-                        child: Text(controller.postList[index]['project_name']),
+                  ListTile(
+                    leading: Padding(
+                      padding: const EdgeInsets.only(left: 32.0),
+                      child: Text(controller.postList[index]['project_name']),
+                    ),
+                    trailing:
+                        //북마크 저장
+                        Obx(
+                      () => IconButton(
+                        onPressed: () {
+                          if (controller.bookMark
+                              .toString()
+                              .contains(controller.postList[index]['id'])) {
+                            controller.bookMark
+                                .remove(controller.postList[index]);
+                            Hive.box('BookMark')
+                                .put('BookMark', controller.bookMark);
+                          } else {
+                            controller.bookMark.add(controller.postList[index]);
+                            Hive.box('BookMark')
+                                .put('BookMark', controller.bookMark);
+                          }
+                        },
+                        icon: controller.bookMark
+                                .toString()
+                                .contains(controller.postList[index]['id'])
+                            ? const Icon(Icons.bookmark, color: Colors.red)
+                            : const Icon(
+                                Icons.bookmark_border,
+                              ),
                       ),
-                      Expanded(
-                        child: Align(
-                          alignment: Alignment.bottomRight,
-                          child: Obx(
-                            () => IconButton(
-                              onPressed: () {
-                                if (controller.bookMark.toString().contains(
-                                    controller.postList[index]['id'])) {
-                                  controller.bookMark
-                                      .remove(controller.postList[index]);
-                                  Hive.box('BookMark')
-                                      .put('BookMark', controller.bookMark);
-                                } else {
-                                  controller.bookMark
-                                      .add(controller.postList[index]);
-                                  Hive.box('BookMark')
-                                      .put('BookMark', controller.bookMark);
-                                }
-                              },
-                              icon: controller.bookMark.toString().contains(
-                                      controller.postList[index]['id'])
-                                  ? const Icon(Icons.bookmark,
-                                      color: Colors.red)
-                                  : const Icon(
-                                      Icons.bookmark_border,
-                                    ),
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
+                    ),
                   ),
+                  //태그 배열
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
                     child: SizedBox(

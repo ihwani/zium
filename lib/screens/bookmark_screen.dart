@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hive/hive.dart';
 import 'package:zium/getx/getx_controller.dart';
 
 class BookmarkScreen extends StatelessWidget {
@@ -18,26 +19,63 @@ class BookmarkScreen extends StatelessWidget {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(
-            height: 16,
-          ),
-          SizedBox(
-            height: 20,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                children: const [
-                  Text(
-                    '저장된 사무소',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ListTile(
+            leading: const Text(
+              '저장된 사무소',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: SizedBox(
+                      height: 100,
+                      width: 300,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text(
+                            "저장된 사무소를 전부 삭제하시겠습니까?",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("취소")),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Hive.box('Favorite').delete('Favorite');
+                                  controller.keyList.clear();
+                                  controller.favorite.clear();
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("확인"),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ],
-              ),
+                );
+              },
+              icon: const Icon(Icons.close),
             ),
           ),
-          const SizedBox(
-            height: 16,
-          ),
+          //저장된 사무소 배치
           Padding(
             padding: const EdgeInsets.only(left: 10),
             child: Obx(
@@ -56,7 +94,7 @@ class BookmarkScreen extends StatelessWidget {
                         child: SizedBox(
                           width: 50,
                           child: CircleAvatar(
-                            radius: 30,
+                            radius: 50,
                             backgroundColor: Colors.white,
                             child: CachedNetworkImage(
                               imageUrl: controller
@@ -81,23 +119,65 @@ class BookmarkScreen extends StatelessWidget {
           const SizedBox(
             height: 16,
           ),
-          SizedBox(
-            height: 20,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Row(
-                children: const [
-                  Text(
-                    '저장된 피드',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+          ListTile(
+            leading: const Text(
+              '저장된 피드',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            trailing: IconButton(
+              onPressed: () {
+                showDialog(
+                  context: context,
+                  builder: (context) => Dialog(
+                    child: SizedBox(
+                      height: 100,
+                      width: 300,
+                      child: Column(
+                        children: [
+                          const SizedBox(
+                            height: 16,
+                          ),
+                          const Text(
+                            "저장된 피드를 전부 삭제하시겠습니까?",
+                            style: TextStyle(color: Colors.black, fontSize: 18),
+                          ),
+                          const SizedBox(
+                            height: 8,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                  child: const Text("취소")),
+                              const SizedBox(
+                                width: 30,
+                              ),
+                              TextButton(
+                                onPressed: () {
+                                  Hive.box('BookMark').delete('BookMark');
+                                  controller.bookMark.clear();
+                                  Navigator.pop(context);
+                                },
+                                child: const Text("확인"),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                ],
-              ),
+                );
+              },
+              icon: const Icon(Icons.close),
             ),
           ),
           const SizedBox(
             height: 16,
           ),
+          //저장된 피드 배치
           Expanded(
             child: SingleChildScrollView(
               scrollDirection: Axis.vertical,
@@ -109,8 +189,8 @@ class BookmarkScreen extends StatelessWidget {
                     controller.bookMark.length,
                     (index) {
                       return SizedBox(
-                        width: (size.width - 3) / 3,
-                        height: (size.width - 3) / 3,
+                        width: (size.width - 2) / 2,
+                        height: (size.width - 2) / 2,
                         child: GestureDetector(
                           onTap: () {
                             Get.toNamed('/select',

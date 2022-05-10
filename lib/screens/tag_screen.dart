@@ -2,18 +2,17 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
+import 'package:zium/util/util.dart';
 
 class TagScreen extends StatelessWidget {
   const TagScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(Controller());
-    final List foundList = controller.postList
-        .where(
-          (element) => element.toString().contains(Get.arguments),
-        )
-        .toList();
+    final controller = Get.put(
+      Controller(),
+    );
+    getSearch(controller.postList, Get.arguments);
 
     foundList.shuffle();
 

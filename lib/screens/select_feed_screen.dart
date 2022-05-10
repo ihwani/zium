@@ -89,52 +89,45 @@ class SelectFeedScreen extends StatelessWidget {
             ),
           ),
         ),
-        Row(children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 10.0),
-            child: Row(children: [
-              const Icon(Icons.location_on),
-              Text(Get.arguments['location'])
-            ]),
-          ),
-        ]),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+        Padding(
+          padding: const EdgeInsets.only(left: 16.0),
+          child: Row(children: [
+            const Icon(Icons.location_on),
+            const SizedBox(
+              width: 8,
+            ),
+            Text(Get.arguments['location'])
+          ]),
+        ),
+        ListTile(
+            leading: Padding(
+              padding: const EdgeInsets.only(left: 32.0),
               child: Text(Get.arguments['project_name']),
             ),
-            Expanded(
-              child: Align(
-                alignment: Alignment.bottomRight,
-                child: Obx(
-                  () => IconButton(
-                    onPressed: () {
-                      if (controller.bookMark
-                          .toString()
-                          .contains(Get.arguments['id'])) {
-                        controller.bookMark.remove(Get.arguments);
-                        Hive.box('BookMark')
-                            .put('BookMark', controller.bookMark);
-                      } else {
-                        controller.bookMark.add(Get.arguments);
-                        Hive.box('BookMark')
-                            .put('BookMark', controller.bookMark);
-                      }
-                    },
-                    icon: controller.bookMark
-                            .toString()
-                            .contains(Get.arguments['id'])
+            trailing:
+                //북마크 저장
+                Obx(
+              () => IconButton(
+                onPressed: () {
+                  if (controller.bookMark
+                      .toString()
+                      .contains(Get.arguments['id'])) {
+                    controller.bookMark.remove(Get.arguments);
+                    Hive.box('BookMark').put('BookMark', controller.bookMark);
+                  } else {
+                    controller.bookMark.add(Get.arguments);
+                    Hive.box('BookMark').put('BookMark', controller.bookMark);
+                  }
+                },
+                icon:
+                    controller.bookMark.toString().contains(Get.arguments['id'])
                         ? const Icon(Icons.bookmark, color: Colors.red)
                         : const Icon(
                             Icons.bookmark_border,
                           ),
-                  ),
-                ),
               ),
-            )
-          ],
-        ),
+            )),
+        //태그 배열
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: SizedBox(
