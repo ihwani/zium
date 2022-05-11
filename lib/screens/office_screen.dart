@@ -204,7 +204,7 @@ class OfficeScreen extends StatelessWidget {
             ListTile(
               leading: const Icon(Icons.perm_identity),
               title: SizedBox(
-                height: 16,
+                height: 20,
                 child: Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(

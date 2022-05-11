@@ -1,0 +1,146 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.example.zium"
+4    android:versionCode="1"
+5    android:versionName="1.0.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="16"
+9        android:targetSdkVersion="31" />
+10    <!--
+11         Flutter needs it to communicate with the running application
+12         to allow setting breakpoints, to provide hot reload, etc.
+13    -->
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/ihwani/Documents/GitHub/zium/android/app/src/debug/AndroidManifest.xml:6:5-66
+14-->/Users/ihwani/Documents/GitHub/zium/android/app/src/debug/AndroidManifest.xml:6:22-64
+15
+16    <queries>
+16-->/Users/ihwani/Documents/GitHub/zium/android/app/src/main/AndroidManifest.xml:34:7-39:13
+17        <intent>
+17-->/Users/ihwani/Documents/GitHub/zium/android/app/src/main/AndroidManifest.xml:35:5-38:14
+18            <action android:name="android.intent.action.SENDTO" />
+18-->/Users/ihwani/Documents/GitHub/zium/android/app/src/main/AndroidManifest.xml:36:7-61
+18-->/Users/ihwani/Documents/GitHub/zium/android/app/src/main/AndroidManifest.xml:36:15-58
+19
+20            <data android:scheme="mailto" />
+20-->/Users/ihwani/Documents/GitHub/zium/android/app/src/main/AndroidManifest.xml:37:7-39
+20-->/Users/ihwani/Documents/GitHub/zium/android/app/src/main/AndroidManifest.xml:37:13-36
+21        </intent>
+22    </queries>
+23
+24    <uses-permission android:name="android.permission.CALL_PHONE" />
+24-->[:flutter_phone_direct_caller] /Users/ihwani/Documents/GitHub/zium/build/flutter_phone_direct_caller/intermediates/merged_manifest/debug/AndroidManifest.xml:9:5-69
+24-->[:flutter_phone_direct_caller] /Users/ihwani/Documents/GitHub/zium/build/flutter_phone_direct_caller/intermediates/merged_manifest/debug/AndroidManifest.xml:9:22-66
+25
+26    <uses-feature
+26-->[:flutter_phone_direct_caller] /Users/ihwani/Documents/GitHub/zium/build/flutter_phone_direct_caller/intermediates/merged_manifest/debug/AndroidManifest.xml:11:5-13:36
+27        android:name="android.hardware.telephony"
+27-->[:flutter_phone_direct_caller] /Users/ihwani/Documents/GitHub/zium/build/flutter_phone_direct_caller/intermediates/merged_manifest/debug/AndroidManifest.xml:12:9-50
+28        android:required="false" />
+28-->[:flutter_phone_direct_caller] /Users/ihwani/Documents/GitHub/zium/build/flutter_phone_direct_caller/intermediates/merged_manifest/debug/AndroidManifest.xml:13:9-33
+29
+30    <application
+31        android:name="android.app.Application"
+32        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+32-->[androidx.core:core:1.7.0] /Users/ihwani/.gradle/caches/transforms-3/85a4b6c8bc3231eaaf425d8692a95516/transformed/core-1.7.0/AndroidManifest.xml:24:18-86
+33        android:debuggable="true"
+34        android:icon="@mipmap/ic_launcher"
+35        android:label="지음" >
+36        <activity
+37            android:name="com.example.zium.MainActivity"
+38            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+39            android:exported="true"
+40            android:hardwareAccelerated="true"
+41            android:launchMode="singleTop"
+42            android:theme="@style/LaunchTheme"
+43            android:windowSoftInputMode="adjustResize" >
+44
+45            <!--
+46                 Specifies an Android theme to apply to this Activity as soon as
+47                 the Android process has started. This theme is visible to the user
+48                 while the Flutter UI initializes. After that, this theme continues
+49                 to determine the Window background behind the Flutter UI.
+50            -->
+51            <meta-data
+52                android:name="io.flutter.embedding.android.NormalTheme"
+53                android:resource="@style/NormalTheme" />
+54
+55            <intent-filter>
+56                <action android:name="android.intent.action.MAIN" />
+57
+58                <category android:name="android.intent.category.LAUNCHER" />
+59            </intent-filter>
+60        </activity>
+61        <!--
+62             Don't delete the meta-data below.
+63             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java
+64        -->
+65        <meta-data
+66            android:name="flutterEmbedding"
+67            android:value="2" />
+68
+69        <provider
+69-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-16:20
+70            android:name="com.sidlatau.flutteremailsender.FlutterEmailSenderFileProvider"
+70-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-90
+71            android:authorities="com.example.zium.file_provider"
+71-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-65
+72            android:exported="false"
+72-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-37
+73            android:grantUriPermissions="true" >
+73-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:12:13-47
+74            <meta-data
+74-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:13:13-15:61
+75                android:name="android.support.FILE_PROVIDER_PATHS"
+75-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:14:17-67
+76                android:resource="@xml/shared_file_paths" />
+76-->[:flutter_email_sender] /Users/ihwani/Documents/GitHub/zium/build/flutter_email_sender/intermediates/merged_manifest/debug/AndroidManifest.xml:15:17-58
+77        </provider>
+78
+79        <activity
+79-->[:url_launcher_android] /Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:8:9-11:74
+80            android:name="io.flutter.plugins.urllauncher.WebViewActivity"
+80-->[:url_launcher_android] /Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:9:13-74
+81            android:exported="false"
+81-->[:url_launcher_android] /Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:10:13-37
+82            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+82-->[:url_launcher_android] /Users/ihwani/Documents/GitHub/zium/build/url_launcher_android/intermediates/merged_manifest/debug/AndroidManifest.xml:11:13-71
+83
+84        <uses-library
+84-->[androidx.window:window:1.0.0-beta04] /Users/ihwani/.gradle/caches/transforms-3/c291a541648cf1084eba3acf0d5d6a11/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:25:9-27:40
+85            android:name="androidx.window.extensions"
+85-->[androidx.window:window:1.0.0-beta04] /Users/ihwani/.gradle/caches/transforms-3/c291a541648cf1084eba3acf0d5d6a11/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:26:13-54
+86            android:required="false" />
+86-->[androidx.window:window:1.0.0-beta04] /Users/ihwani/.gradle/caches/transforms-3/c291a541648cf1084eba3acf0d5d6a11/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:27:13-37
+87        <uses-library
+87-->[androidx.window:window:1.0.0-beta04] /Users/ihwani/.gradle/caches/transforms-3/c291a541648cf1084eba3acf0d5d6a11/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:28:9-30:40
+88            android:name="androidx.window.sidecar"
+88-->[androidx.window:window:1.0.0-beta04] /Users/ihwani/.gradle/caches/transforms-3/c291a541648cf1084eba3acf0d5d6a11/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:29:13-51
+89            android:required="false" />
+89-->[androidx.window:window:1.0.0-beta04] /Users/ihwani/.gradle/caches/transforms-3/c291a541648cf1084eba3acf0d5d6a11/transformed/jetified-window-1.0.0-beta04/AndroidManifest.xml:30:13-37
+90
+91        <provider
+91-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:26:9-34:20
+92            android:name="androidx.startup.InitializationProvider"
+92-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:27:13-67
+93            android:authorities="com.example.zium.androidx-startup"
+93-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:28:13-68
+94            android:exported="false" >
+94-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:29:13-37
+95            <meta-data
+95-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:31:13-33:52
+96                android:name="androidx.emoji2.text.EmojiCompatInitializer"
+96-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:32:17-75
+97                android:value="androidx.startup" />
+97-->[androidx.emoji2:emoji2:1.0.0] /Users/ihwani/.gradle/caches/transforms-3/0a4ac16da09cdf44d04b867828102589/transformed/jetified-emoji2-1.0.0/AndroidManifest.xml:33:17-49
+98            <meta-data
+98-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/ihwani/.gradle/caches/transforms-3/cdc1265e87ea687c8dd5a1e04782379f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:31:13-33:52
+99                android:name="androidx.lifecycle.ProcessLifecycleInitializer"
+99-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/ihwani/.gradle/caches/transforms-3/cdc1265e87ea687c8dd5a1e04782379f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:32:17-78
+100                android:value="androidx.startup" />
+100-->[androidx.lifecycle:lifecycle-process:2.4.0] /Users/ihwani/.gradle/caches/transforms-3/cdc1265e87ea687c8dd5a1e04782379f/transformed/jetified-lifecycle-process-2.4.0/AndroidManifest.xml:33:17-49
+101        </provider>
+102    </application>
+103
+104</manifest>
