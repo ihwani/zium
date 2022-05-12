@@ -71,8 +71,7 @@ class FeedScreen extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
                     child: GestureDetector(
                       onTap: () {
-                        Get.toNamed("select",
-                            arguments: controller.postList[index]);
+                        launchURL(controller.postList[index]['project_link']);
                       },
                       child: SizedBox(
                         child: CachedNetworkImage(
