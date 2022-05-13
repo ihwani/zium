@@ -43,12 +43,16 @@ void main() async {
 // ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final controller = Get.put(Controller());
+  final controller = Get.put(
+    Controller(),
+  );
 
 //서버db 로드
   getData() async {
-    var _result = await http.get(Uri.parse(
-        'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json'));
+    var _result = await http.get(
+      Uri.parse(
+          'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json'),
+    );
     List _results = jsonDecode(_result.body);
     controller.postList.addAll(_results);
     controller.postList.shuffle();
