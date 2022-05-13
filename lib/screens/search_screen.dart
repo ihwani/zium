@@ -1,5 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
@@ -15,10 +16,14 @@ class _SearchScreenState extends State<SearchScreen> {
   final controller = Get.put(Controller());
   //검색 함수
   void _runFilter(String enteredKeyword) {
+    List searchList = controller.postList;
+    for (int i = 0; searchList.length > i; i++) {
+      searchList[i].remove('office_address');
+    }
     if (enteredKeyword.isEmpty) {
       keywordList.clear();
     } else {
-      keywordList = controller.postList
+      keywordList = searchList
           .where(
             (element) => element.toString().contains(enteredKeyword),
           )
@@ -36,6 +41,7 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
+    int widthAxisCount = size.width ~/ 300;
 
     return Scaffold(
       appBar: AppBar(
@@ -62,38 +68,26 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
       //검색 결과
-      body: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Wrap(
-          spacing: 1,
-          runSpacing: 1,
-          children: List.generate(
-            keywordList.length,
-            (index) {
-              return SizedBox(
-                width: (size.width - 3) / 3,
-                height: (size.width - 3) / 3,
-                child: GestureDetector(
-                  onTap: () {
-                    Get.toNamed('/select', arguments: keywordList[index]);
-                  },
-                  child: SizedBox(
-                    child: CachedNetworkImage(
-                      height: MediaQuery.of(context).size.height * 0.35,
-                      width: double.infinity,
-                      fit: BoxFit.cover,
-                      imageUrl: keywordList[index]['image_link'],
-                      placeholder: (context, url) => const Center(
-                          heightFactor: 30, child: CircularProgressIndicator()),
-                      errorWidget: (context, url, error) =>
-                          const Icon(Icons.error),
-                    ),
-                  ),
-                ),
-              );
+      body: MasonryGridView.count(
+        padding: const EdgeInsets.symmetric(horizontal: 8),
+        itemCount: keywordList.length,
+        crossAxisCount: widthAxisCount > 2 ? widthAxisCount : 2,
+        mainAxisSpacing: 8,
+        crossAxisSpacing: 8,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {
+              Get.toNamed('/select', arguments: keywordList[index]);
             },
-          ),
-        ),
+            child: ExtendedImage.network(
+              keywordList[index]['image_link'],
+              fit: BoxFit.cover,
+              cache: true,
+              shape: BoxShape.rectangle,
+              borderRadius: const BorderRadius.all(Radius.circular(16)),
+            ),
+          );
+        },
       ),
     );
   }

@@ -6,6 +6,7 @@ List foundList = [];
 List keywordList = [];
 
 Future<void> launchURL(String url) async {
+  // ignore: deprecated_member_use
   await launch(
     url,
     forceSafariVC: false,

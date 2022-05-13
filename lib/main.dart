@@ -66,7 +66,7 @@ class MyApp extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white10,
         elevation: 0,
         title: const Padding(
           padding: EdgeInsets.all(8.0),

@@ -24,6 +24,36 @@
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/url_launcher_windows/.pub" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/url_launcher_windows/.dart_tool" />
       <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/url_launcher_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/build" />
+      <excludeFolder url="file://$MODULE_DIR$/windows/flutter/ephemeral/.plugin_symlinks/path_provider_windows/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_ios/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_ios/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_ios/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_phone_direct_caller/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_phone_direct_caller/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_phone_direct_caller/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/sqflite/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/sqflite/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/sqflite/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_phone_direct_caller/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_phone_direct_caller/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_phone_direct_caller/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_email_sender/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_email_sender/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_email_sender/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/sqflite/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/sqflite/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/sqflite/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_ios/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_ios/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/path_provider_ios/example/.dart_tool" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_email_sender/example/build" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_email_sender/example/.pub" />
+      <excludeFolder url="file://$MODULE_DIR$/ios/.symlinks/plugins/flutter_email_sender/example/.dart_tool" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 31 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

@@ -1,5 +1,6 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:zium/getx/getx_controller.dart';
@@ -12,8 +13,11 @@ class BookmarkScreen extends StatelessWidget {
     final controller = Get.put(Controller());
 
     var size = MediaQuery.of(context).size;
+    int widthAxisCount = size.width ~/ 300;
+
     controller.keyList.clear();
     controller.keyList.addAll(controller.favorite.keys);
+    controller.keyList.shuffle();
 
     return Scaffold(
       body: Column(
@@ -96,13 +100,9 @@ class BookmarkScreen extends StatelessWidget {
                           child: CircleAvatar(
                             radius: 50,
                             backgroundColor: Colors.white,
-                            child: CachedNetworkImage(
-                              imageUrl: controller
-                                  .favorite[controller.keyList[index]],
-                              placeholder: (context, url) =>
-                                  const CircularProgressIndicator(),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
+                            child: ExtendedImage.network(
+                              controller.favorite[controller.keyList[index]],
+                              cache: true,
                             ),
                           ),
                         ),
@@ -179,42 +179,28 @@ class BookmarkScreen extends StatelessWidget {
           ),
           //저장된 피드 배치
           Expanded(
-            child: SingleChildScrollView(
-              scrollDirection: Axis.vertical,
-              child: Obx(
-                () => Wrap(
-                  spacing: 1,
-                  runSpacing: 1,
-                  children: List.generate(
-                    controller.bookMark.length,
-                    (index) {
-                      return SizedBox(
-                        width: (size.width - 2) / 2,
-                        height: (size.width - 2) / 2,
-                        child: GestureDetector(
-                          onTap: () {
-                            Get.toNamed('/select',
-                                arguments: controller.bookMark[index]);
-                          },
-                          child: SizedBox(
-                            child: CachedNetworkImage(
-                              height: MediaQuery.of(context).size.height * 0.35,
-                              width: double.infinity,
-                              fit: BoxFit.cover,
-                              imageUrl: controller.bookMark[index]
-                                  ['image_link'],
-                              placeholder: (context, url) => const Center(
-                                  heightFactor: 30,
-                                  child: CircularProgressIndicator()),
-                              errorWidget: (context, url, error) =>
-                                  const Icon(Icons.error),
-                            ),
-                          ),
-                        ),
-                      );
+            child: Obx(
+              () => MasonryGridView.count(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                itemCount: controller.bookMark.length,
+                crossAxisCount: widthAxisCount > 2 ? widthAxisCount : 2,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/select',
+                          arguments: controller.bookMark[index]);
                     },
-                  ),
-                ),
+                    child: ExtendedImage.network(
+                      controller.bookMark[index]['image_link'],
+                      fit: BoxFit.cover,
+                      cache: true,
+                      shape: BoxShape.rectangle,
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    ),
+                  );
+                },
               ),
             ),
           ),

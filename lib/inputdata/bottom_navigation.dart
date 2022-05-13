@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
@@ -11,9 +10,14 @@ class BottomNavigation extends StatelessWidget {
     final controller = Get.put(Controller());
 
     return Obx(
-      () => CupertinoTabBar(
-        backgroundColor: Colors.white,
-        activeColor: Colors.black,
+      () => BottomNavigationBar(
+        backgroundColor: Colors.white10,
+        unselectedItemColor: Colors.grey,
+        selectedItemColor: Colors.black,
+        showSelectedLabels: false,
+        showUnselectedLabels: false,
+        type: BottomNavigationBarType.fixed,
+        elevation: 0,
         onTap: (int index) {
           controller.currentIndex.value = index;
         },
