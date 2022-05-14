@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
@@ -10,13 +11,16 @@ class TagScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final controller = Get.put(
       Controller(),
     );
     getSearch(controller.postList, Get.arguments);
 
-    var size = MediaQuery.of(context).size;
     int widthAxisCount = size.width ~/ 300;
+    int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
+
+    String _argumentsData = Get.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -24,7 +28,7 @@ class TagScreen extends StatelessWidget {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          '#' + Get.arguments.toString(),
+          '#' + _argumentsData.toString(),
           style: const TextStyle(color: Colors.black),
         ),
         actions: [
@@ -41,26 +45,37 @@ class TagScreen extends StatelessWidget {
           )
         ],
       ),
-      body: MasonryGridView.count(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        itemCount: foundList.length,
-        crossAxisCount: widthAxisCount > 2 ? widthAxisCount : 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Get.toNamed('/select', arguments: foundList[index]);
-            },
-            child: ExtendedImage.network(
-              foundList[index]['image_link'],
-              fit: BoxFit.cover,
-              cache: true,
-              shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-          );
-        },
+      body: AnimationLimiter(
+        child: MasonryGridView.count(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          itemCount: foundList.length,
+          crossAxisCount: _axiisCount,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredGrid(
+              position: index,
+              duration: const Duration(milliseconds: 375),
+              columnCount: _axiisCount,
+              child: ScaleAnimation(
+                child: FadeInAnimation(
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/select', arguments: foundList[index]);
+                    },
+                    child: ExtendedImage.network(
+                      foundList[index]['image_link'],
+                      fit: BoxFit.cover,
+                      cache: true,
+                      shape: BoxShape.rectangle,
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

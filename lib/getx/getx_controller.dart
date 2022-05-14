@@ -16,4 +16,21 @@ class Controller extends GetxController {
   RxMap favorite = {}.obs;
   RxList postList = [].obs;
   RxList keyList = [].obs;
+  RxList keywordList = [].obs;
+
+//검색함수-2
+  runFilter(String enteredKeyword, l, k) {
+    List searchList = l;
+    if (enteredKeyword.isEmpty) {
+      k.clear();
+    } else {
+      k = searchList
+          .where(
+            (element) => element.toString().contains(enteredKeyword),
+          )
+          .toList();
+      k.shuffle();
+      update();
+    }
+  }
 }

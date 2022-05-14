@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
@@ -17,9 +18,6 @@ class _SearchScreenState extends State<SearchScreen> {
   //검색 함수
   void _runFilter(String enteredKeyword) {
     List searchList = controller.postList;
-    for (int i = 0; searchList.length > i; i++) {
-      searchList[i].remove('office_address');
-    }
     if (enteredKeyword.isEmpty) {
       keywordList.clear();
     } else {
@@ -28,20 +26,18 @@ class _SearchScreenState extends State<SearchScreen> {
             (element) => element.toString().contains(enteredKeyword),
           )
           .toList();
-      keywordList.shuffle();
-    }
 
-    setState(
-      () {
+      setState(() {
         keywordList.shuffle();
-      },
-    );
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
+    final size = MediaQuery.of(context).size;
     int widthAxisCount = size.width ~/ 300;
+    int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
 
     return Scaffold(
       appBar: AppBar(
@@ -68,26 +64,37 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
       ),
       //검색 결과
-      body: MasonryGridView.count(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        itemCount: keywordList.length,
-        crossAxisCount: widthAxisCount > 2 ? widthAxisCount : 2,
-        mainAxisSpacing: 8,
-        crossAxisSpacing: 8,
-        itemBuilder: (context, index) {
-          return GestureDetector(
-            onTap: () {
-              Get.toNamed('/select', arguments: keywordList[index]);
-            },
-            child: ExtendedImage.network(
-              keywordList[index]['image_link'],
-              fit: BoxFit.cover,
-              cache: true,
-              shape: BoxShape.rectangle,
-              borderRadius: const BorderRadius.all(Radius.circular(16)),
-            ),
-          );
-        },
+      body: AnimationLimiter(
+        child: MasonryGridView.count(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          itemCount: keywordList.length,
+          crossAxisCount: _axiisCount,
+          mainAxisSpacing: 8,
+          crossAxisSpacing: 8,
+          itemBuilder: (context, index) {
+            return AnimationConfiguration.staggeredGrid(
+              position: index,
+              duration: const Duration(milliseconds: 375),
+              columnCount: _axiisCount,
+              child: ScaleAnimation(
+                child: FadeInAnimation(
+                  child: GestureDetector(
+                    onTap: () {
+                      Get.toNamed('/select', arguments: keywordList[index]);
+                    },
+                    child: ExtendedImage.network(
+                      keywordList[index]['image_link'],
+                      fit: BoxFit.cover,
+                      cache: true,
+                      shape: BoxShape.rectangle,
+                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                    ),
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }

@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -10,10 +11,11 @@ class BookmarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final controller = Get.put(Controller());
 
-    var size = MediaQuery.of(context).size;
     int widthAxisCount = size.width ~/ 300;
+    int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
 
     controller.keyList.clear();
     controller.keyList.addAll(controller.favorite.keys);
@@ -179,25 +181,35 @@ class BookmarkScreen extends StatelessWidget {
           ),
           //저장된 피드 배치
           Expanded(
-            child: Obx(
-              () => MasonryGridView.count(
+            child: AnimationLimiter(
+              child: MasonryGridView.count(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 itemCount: controller.bookMark.length,
-                crossAxisCount: widthAxisCount > 2 ? widthAxisCount : 2,
+                crossAxisCount: _axiisCount,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () {
-                      Get.toNamed('/select',
-                          arguments: controller.bookMark[index]);
-                    },
-                    child: ExtendedImage.network(
-                      controller.bookMark[index]['image_link'],
-                      fit: BoxFit.cover,
-                      cache: true,
-                      shape: BoxShape.rectangle,
-                      borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  return AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    columnCount: _axiisCount,
+                    child: ScaleAnimation(
+                      child: FadeInAnimation(
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.toNamed('/select',
+                                arguments: controller.bookMark[index]);
+                          },
+                          child: ExtendedImage.network(
+                            controller.bookMark[index]['image_link'],
+                            fit: BoxFit.cover,
+                            cache: true,
+                            shape: BoxShape.rectangle,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                          ),
+                        ),
+                      ),
                     ),
                   );
                 },

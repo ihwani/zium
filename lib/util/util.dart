@@ -36,6 +36,7 @@ getSaveData(a, b) {
   b.runtimeType == List ? b.shuffle() : null;
 }
 
+//검색함수-1
 getSearch(c, s) {
   foundList = c
       .where(

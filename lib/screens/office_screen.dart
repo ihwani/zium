@@ -1,6 +1,7 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_email_sender/flutter_email_sender.dart';
+import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
@@ -13,13 +14,16 @@ class OfficeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
     final controller = Get.put(
       Controller(),
     );
     getSearch(controller.postList, Get.arguments);
 
-    var size = MediaQuery.of(context).size;
     int widthAxisCount = size.width ~/ 300;
+    int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
+
+    String _argumentsData = Get.arguments;
 
     void _sendEmail() async {
       final Email email = Email(
@@ -99,26 +103,38 @@ class OfficeScreen extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: MasonryGridView.count(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              itemCount: foundList.length,
-              crossAxisCount: widthAxisCount > 2 ? widthAxisCount : 2,
-              mainAxisSpacing: 8,
-              crossAxisSpacing: 8,
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Get.toNamed('/select', arguments: foundList[index]);
-                  },
-                  child: ExtendedImage.network(
-                    foundList[index]['image_link'],
-                    fit: BoxFit.cover,
-                    cache: true,
-                    shape: BoxShape.rectangle,
-                    borderRadius: const BorderRadius.all(Radius.circular(16)),
-                  ),
-                );
-              },
+            child: AnimationLimiter(
+              child: MasonryGridView.count(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                itemCount: foundList.length,
+                crossAxisCount: _axiisCount,
+                mainAxisSpacing: 8,
+                crossAxisSpacing: 8,
+                itemBuilder: (context, index) {
+                  return AnimationConfiguration.staggeredGrid(
+                    position: index,
+                    duration: const Duration(milliseconds: 375),
+                    columnCount: _axiisCount,
+                    child: ScaleAnimation(
+                      child: FadeInAnimation(
+                        child: GestureDetector(
+                          onTap: () {
+                            Get.toNamed('/select', arguments: foundList[index]);
+                          },
+                          child: ExtendedImage.network(
+                            foundList[index]['image_link'],
+                            fit: BoxFit.cover,
+                            cache: true,
+                            shape: BoxShape.rectangle,
+                            borderRadius:
+                                const BorderRadius.all(Radius.circular(16)),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
             ),
           ),
         ],
@@ -129,9 +145,11 @@ class OfficeScreen extends StatelessWidget {
           children: [
             UserAccountsDrawerHeader(
               decoration: const BoxDecoration(
-                  color: Colors.blue,
-                  borderRadius:
-                      BorderRadius.only(bottomRight: Radius.circular(30))),
+                color: Colors.blue,
+                borderRadius: BorderRadius.only(
+                  bottomRight: Radius.circular(30),
+                ),
+              ),
               accountName: Center(
                 child: Row(
                   children: [
@@ -150,12 +168,12 @@ class OfficeScreen extends StatelessWidget {
                               onPressed: () {
                                 List result = [];
                                 result.addAll(controller.favorite.keys);
-                                if (result.contains(Get.arguments)) {
-                                  controller.favorite.remove(Get.arguments);
+                                if (result.contains(_argumentsData)) {
+                                  controller.favorite.remove(_argumentsData);
                                   Hive.box('Favorite')
                                       .put('Favorite', controller.favorite);
                                 } else {
-                                  controller.favorite[Get.arguments] =
+                                  controller.favorite[_argumentsData] =
                                       foundList[0]['ic_link'];
                                   Hive.box('Favorite')
                                       .put('Favorite', controller.favorite);
@@ -166,7 +184,7 @@ class OfficeScreen extends StatelessWidget {
                               },
                               icon: controller.favorite
                                       .toString()
-                                      .contains(Get.arguments)
+                                      .contains(_argumentsData)
                                   ? const Icon(Icons.star, color: Colors.red)
                                   : const Icon(
                                       Icons.star_border,
@@ -180,12 +198,34 @@ class OfficeScreen extends StatelessWidget {
                 ),
               ),
               accountEmail: null,
-              currentAccountPicture: CircleAvatar(
-                radius: 16,
-                backgroundColor: Colors.white,
-                child: ExtendedImage.network(
-                  foundList[0]['ic_link'],
-                  cache: true,
+              currentAccountPicture: Container(
+                height: 100,
+                width: 100,
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(20),
+                    ),
+                    color: Colors.white,
+                    boxShadow: [
+                      BoxShadow(
+                        color: Colors.blue.shade100,
+                        offset: const Offset(-1.0, -1.0),
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                      ),
+                      BoxShadow(
+                        color: Colors.grey.shade500,
+                        offset: const Offset(1.0, 1.0),
+                        blurRadius: 5.0,
+                        spreadRadius: 1.0,
+                      ),
+                    ]),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ExtendedImage.network(
+                    foundList[0]['ic_link'],
+                    cache: true,
+                  ),
                 ),
               ),
             ),
