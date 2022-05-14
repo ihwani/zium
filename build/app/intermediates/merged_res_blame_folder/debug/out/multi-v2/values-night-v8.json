@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "/Users/ihwani/Documents/GitHub/zium/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-night-v8/values-night-v8.xml",
+            "outputFile": "C:\\github\\zium\\build\\app\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-night-v8\\values-night-v8.xml",
             "map": [
                 {
-                    "source": "/Users/ihwani/.gradle/caches/transforms-3/14b221489d9eb05e0e9620522e8c9e12/transformed/appcompat-1.4.1/res/values-night-v8/values-night-v8.xml",
+                    "source": "C:\\Users\\ihwan\\.gradle\\caches\\transforms-3\\14b221489d9eb05e0e9620522e8c9e12\\transformed\\appcompat-1.4.1\\res\\values-night-v8\\values-night-v8.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9",
                         "startColumns": "4,4,4,4,4,4,4,4",
@@ -21,14 +21,14 @@
                     }
                 },
                 {
-                    "source": "/Users/ihwani/Documents/GitHub/zium/android/app/src/main/res/values-night/styles.xml",
+                    "source": "C:\\github\\zium\\android\\app\\src\\main\\res\\values-night\\styles.xml",
                     "from": {
                         "startLines": "3,14",
                         "startColumns": "4,4",
-                        "startOffsets": "172,806",
+                        "startOffsets": "175,820",
                         "endLines": "7,16",
                         "endColumns": "12,12",
-                        "endOffsets": "464,970"
+                        "endOffsets": "471,986"
                     },
                     "to": {
                         "startLines": "2,7",
