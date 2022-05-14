@@ -4,6 +4,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 List foundList = [];
 List keywordList = [];
+// ignore: non_constant_identifier_names
+Map office_addressList = {};
 
 Future<void> launchURL(String url) async {
   // ignore: deprecated_member_use

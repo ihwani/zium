@@ -17,7 +17,6 @@ class FeedScreen extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     int widthAxisCount = size.width ~/ 400;
     int _axiisCount = widthAxisCount > 1 ? widthAxisCount : 1;
-
     return RefreshIndicator(
       onRefresh: () => onRefresh(controller.postList),
       child: Padding(

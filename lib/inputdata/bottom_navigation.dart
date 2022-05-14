@@ -38,11 +38,6 @@ class BottomNavigation extends StatelessWidget {
             activeIcon: Icon(Icons.bookmark),
             label: 'Bookmark',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.feedback_outlined),
-            activeIcon: Icon(Icons.feedback),
-            label: 'Support',
-          ),
         ],
       ),
     );

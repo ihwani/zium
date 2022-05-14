@@ -54,99 +54,120 @@ class SupportScreen extends StatelessWidget {
       }
     }
 
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Image.asset(
-            'assets/ci_zium.png',
-            height: 300,
-          ),
-          const Text(
-            '홈페이지',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          SizedBox(
-            height: 30,
-            width: 200,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue.shade50,
-              ),
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white10,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 8),
+            child: IconButton(
               onPressed: () {
-                launchURL('http://thezium.co.kr');
+                Navigator.pop(context);
               },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.home,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 6,
-                  ),
-                  Text(
-                    'http://thezium.co.kr',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                ],
+              icon: const Icon(
+                Icons.close,
+                color: Colors.black,
               ),
-            ),
-          ),
-          const SizedBox(
-            height: 30,
-          ),
-          const Text(
-            '문의 및 피드백',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-          ),
-          const SizedBox(
-            height: 8,
-          ),
-          SizedBox(
-            height: 30,
-            width: 200,
-            child: TextButton(
-              style: TextButton.styleFrom(
-                backgroundColor: Colors.blue.shade50,
-              ),
-              onPressed: () {
-                _sendEmail();
-              },
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: const [
-                  Icon(
-                    Icons.mail,
-                    size: 20,
-                    color: Colors.black,
-                  ),
-                  SizedBox(
-                    width: 6,
-                  ),
-                  Text(
-                    'thezium@icloud.com',
-                    style: TextStyle(fontSize: 15, color: Colors.black),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(
-            height: 24,
-          ),
-          Obx(
-            () => Text(
-              "${controller.postList.length}개의 DB가 로드되었습니다.",
-              style: TextStyle(color: Colors.grey[300]),
             ),
           )
         ],
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              'assets/ci_zium.png',
+              height: 300,
+            ),
+            const Text(
+              '홈페이지',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              height: 30,
+              width: 200,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue.shade50,
+                ),
+                onPressed: () {
+                  launchURL('http://thezium.co.kr');
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.home,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text(
+                      'http://thezium.co.kr',
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 30,
+            ),
+            const Text(
+              '문의 및 피드백',
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+            ),
+            const SizedBox(
+              height: 8,
+            ),
+            SizedBox(
+              height: 30,
+              width: 200,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.blue.shade50,
+                ),
+                onPressed: () {
+                  _sendEmail();
+                },
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: const [
+                    Icon(
+                      Icons.mail,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                    SizedBox(
+                      width: 6,
+                    ),
+                    Text(
+                      'thezium@icloud.com',
+                      style: TextStyle(fontSize: 15, color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(
+              height: 24,
+            ),
+            Obx(
+              () => Text(
+                "${controller.postList.length}개의 DB가 로드되었습니다.",
+                style: TextStyle(color: Colors.grey[300]),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

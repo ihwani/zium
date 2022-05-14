@@ -37,7 +37,6 @@ void main() async {
   );
 }
 
-// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   final controller = Get.put(
@@ -45,21 +44,35 @@ class MyApp extends StatelessWidget {
   );
 
 //서버db 로드
-  getData() async {
+  getDataList(String u, List l) async {
     var _result = await http.get(
-      Uri.parse(
-          'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json'),
+      Uri.parse(u),
     );
     List _results = jsonDecode(_result.body);
-    controller.postList.addAll(_results);
-    controller.postList.shuffle();
+    l.addAll(_results);
+    l.shuffle();
+  }
+
+//서버db 로드(주소)
+  getDataMap(String u, Map m) async {
+    var _result = await http.get(
+      Uri.parse(u),
+    );
+    Map _results = jsonDecode(_result.body);
+    m.addAll(_results);
   }
 
   @override
   Widget build(BuildContext context) {
-    getData();
+    getDataList(
+        'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_database.json',
+        controller.postList);
+    getDataMap(
+        'https://raw.githubusercontent.com/ihwani/zium_database/main/zium_office_address.json',
+        office_addressList);
     getSaveData('BookMark', controller.bookMark);
     getSaveData('Favorite', controller.favorite);
+
     return Scaffold(
       appBar: AppBar(
         centerTitle: false,
@@ -76,8 +89,26 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: IconButton(
+              onPressed: () {
+                Get.toNamed(
+                  '/support',
+                );
+              },
+              icon: const Icon(
+                Icons.more_horiz,
+                color: Colors.black,
+              ),
+            ),
+          )
+        ],
       ),
-      body: Obx(() => controller.pageList[controller.currentIndex.value]),
+      body: Obx(
+        () => controller.pageList[controller.currentIndex.value],
+      ),
       bottomNavigationBar: const BottomNavigation(),
     );
   }

@@ -290,7 +290,7 @@ class OfficeScreen extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {},
                   child: WordBreakText(
-                    foundList[0]['office_address'],
+                    office_addressList[foundList[0]['office_id']],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
