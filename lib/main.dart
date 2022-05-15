@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/inputdata/bottom_navigation.dart';
 import 'package:zium/screens/bookmark_screen.dart';
@@ -16,10 +17,8 @@ import 'dart:convert';
 import 'package:zium/util/util.dart';
 
 void main() async {
-  await Hive.initFlutter();
-  await Hive.openBox('BookMark');
-  await Hive.openBox('Favorite');
   WidgetsFlutterBinding.ensureInitialized();
+  await initialization(null);
   SystemChrome.setPreferredOrientations(
     [
       DeviceOrientation.portraitUp,
@@ -43,6 +42,14 @@ void main() async {
       home: MyApp(),
     ),
   );
+}
+
+Future initialization(BuildContext? context) async {
+  await Hive.initFlutter();
+  await Hive.openBox('BookMark');
+  await Hive.openBox('Favorite');
+  await Future.delayed(const Duration(seconds: 3));
+  FlutterNativeSplash.remove();
 }
 
 class MyApp extends StatelessWidget {
