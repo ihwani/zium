@@ -6,8 +6,10 @@ import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
+// ignore: must_be_immutable
 class TagScreen extends StatelessWidget {
-  const TagScreen({Key? key}) : super(key: key);
+  TagScreen({Key? key}) : super(key: key);
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +49,7 @@ class TagScreen extends StatelessWidget {
       ),
       body: AnimationLimiter(
         child: MasonryGridView.count(
+          controller: _scrollController,
           padding: const EdgeInsets.symmetric(horizontal: 8),
           itemCount: foundList.length,
           crossAxisCount: _axiisCount,
@@ -77,6 +80,22 @@ class TagScreen extends StatelessWidget {
           },
         ),
       ),
+      floatingActionButton: SizedBox(
+        height: 30,
+        width: 30,
+        child: FloatingActionButton(
+          onPressed: () {
+            controller.scrollToTop(_scrollController);
+          },
+          backgroundColor: Colors.white,
+          elevation: 2,
+          child: const Icon(
+            Icons.keyboard_arrow_up_sharp,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }

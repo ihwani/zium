@@ -199,8 +199,8 @@ class OfficeScreen extends StatelessWidget {
               ),
               accountEmail: null,
               currentAccountPicture: Container(
-                height: 100,
-                width: 100,
+                height: 50,
+                width: 50,
                 decoration: BoxDecoration(
                     borderRadius: const BorderRadius.all(
                       Radius.circular(20),

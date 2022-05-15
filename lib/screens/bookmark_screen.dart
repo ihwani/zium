@@ -83,7 +83,7 @@ class BookmarkScreen extends StatelessWidget {
           ),
           //저장된 사무소 배치
           Padding(
-            padding: const EdgeInsets.only(left: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 8),
             child: Obx(
               () => SizedBox(
                 height: 50,
@@ -91,17 +91,17 @@ class BookmarkScreen extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   itemCount: controller.favorite.length,
                   itemBuilder: ((context, index) {
-                    return Row(children: [
-                      GestureDetector(
-                        onTap: () {
-                          Get.toNamed('/office',
-                              arguments: controller.keyList[index]);
-                        },
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed('/office',
+                            arguments: controller.keyList[index]);
+                      },
+                      child: Card(
                         child: SizedBox(
-                          width: 50,
-                          child: CircleAvatar(
-                            radius: 50,
-                            backgroundColor: Colors.white,
+                          height: 40,
+                          width: 80,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
                             child: ExtendedImage.network(
                               controller.favorite[controller.keyList[index]],
                               cache: true,
@@ -109,10 +109,7 @@ class BookmarkScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      const SizedBox(
-                        width: 8,
-                      )
-                    ]);
+                    );
                   }),
                 ),
               ),

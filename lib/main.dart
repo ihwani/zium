@@ -22,12 +22,12 @@ void main() async {
     GetMaterialApp(
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => const FeedScreen()),
+        GetPage(name: '/', page: () => FeedScreen()),
         GetPage(name: '/select', page: () => const SelectFeedScreen()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/support', page: () => const SupportScreen()),
         GetPage(name: '/office', page: () => const OfficeScreen()),
-        GetPage(name: '/tag', page: () => const TagScreen()),
+        GetPage(name: '/tag', page: () => TagScreen()),
         GetPage(name: '/bookmark', page: () => const BookmarkScreen()),
       ],
       debugShowCheckedModeBanner: false,
@@ -91,7 +91,7 @@ class MyApp extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.only(right: 16.0),
             child: IconButton(
               onPressed: () {
                 Get.toNamed(

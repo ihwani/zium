@@ -23,12 +23,21 @@ class SelectFeedScreen extends StatelessWidget {
         automaticallyImplyLeading: false,
         title: Row(
           children: [
-            CircleAvatar(
-              radius: 16,
-              backgroundColor: Colors.white,
-              child: ExtendedImage.network(
-                _argumentsData['ic_link'],
-                cache: true,
+            Container(
+              height: 56,
+              width: 56,
+              decoration: const BoxDecoration(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(8),
+                ),
+                color: Colors.white,
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: ExtendedImage.network(
+                  _argumentsData['ic_link'],
+                  cache: true,
+                ),
               ),
             ),
             Padding(
@@ -84,9 +93,9 @@ class SelectFeedScreen extends StatelessWidget {
                 },
                 child: ExtendedImage.network(
                   _argumentsData['image_link'],
-                  fit: BoxFit.fitHeight,
+                  fit: BoxFit.contain,
                   cache: true,
-                  height: size.height / (5 / 3),
+                  width: size.width,
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
                 ),
