@@ -5,16 +5,13 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
-import 'dart:io';
 
 class SelectFeedScreen extends StatelessWidget {
   const SelectFeedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final controller = Get.put(Controller());
-
     Map _argumentsData = Get.arguments;
 
     return Scaffold(
@@ -53,7 +50,7 @@ class SelectFeedScreen extends StatelessWidget {
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
-                    fontSize: 16,
+                    fontSize: 20,
                   ),
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -90,7 +87,7 @@ class SelectFeedScreen extends StatelessWidget {
                   _argumentsData['image_link'],
                   fit: BoxFit.contain,
                   cache: true,
-                  width: size.width,
+                  width: context.width,
                   shape: BoxShape.rectangle,
                   borderRadius: const BorderRadius.all(Radius.circular(16)),
                 ),

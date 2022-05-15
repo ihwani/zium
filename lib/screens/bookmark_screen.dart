@@ -11,10 +11,9 @@ class BookmarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final controller = Get.put(Controller());
 
-    int widthAxisCount = size.width ~/ 300;
+    int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
 
     controller.keyList.clear();
@@ -196,6 +195,8 @@ class BookmarkScreen extends StatelessWidget {
                           onTap: () {
                             Get.toNamed('/select',
                                 arguments: controller.bookMark[index]);
+                            // ignore: avoid_print
+                            print(controller.bookMark[index]['id']);
                           },
                           child: ExtendedImage.network(
                             controller.bookMark[index]['image_link'],

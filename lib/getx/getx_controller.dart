@@ -7,9 +7,9 @@ import 'package:zium/screens/search_screen.dart';
 class Controller extends GetxController {
   RxInt currentIndex = 0.obs;
 
-  scrollToTop(c) {
+  scrollToTop(c, int t) {
     c.animateTo(c.position.minScrollExtent,
-        duration: const Duration(milliseconds: 100), curve: Curves.linear);
+        duration: Duration(milliseconds: t), curve: Curves.linear);
   }
 
   final pageList = [

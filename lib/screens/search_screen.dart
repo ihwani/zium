@@ -36,8 +36,7 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    int widthAxisCount = size.width ~/ 300;
+    int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
 
     return Scaffold(
@@ -103,7 +102,8 @@ class _SearchScreenState extends State<SearchScreen> {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(_scrollController);
+            controller.scrollToTop(
+                _scrollController, _scrollController.offset ~/ 10);
           },
           backgroundColor: Colors.white,
           elevation: 2,

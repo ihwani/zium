@@ -15,8 +15,7 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(Controller());
-    final size = MediaQuery.of(context).size;
-    int widthAxisCount = size.width ~/ 400;
+    int widthAxisCount = context.width ~/ 400;
     int _axiisCount = widthAxisCount > 1 ? widthAxisCount : 1;
     return Scaffold(
       body: RefreshIndicator(
@@ -105,7 +104,7 @@ class FeedScreen extends StatelessWidget {
                                       controller.postList[index]['image_link'],
                                       fit: BoxFit.fitWidth,
                                       cache: true,
-                                      width: size.width,
+                                      width: context.width,
                                     ),
                                   ),
                                 ),
@@ -224,7 +223,8 @@ class FeedScreen extends StatelessWidget {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(_scrollController);
+            controller.scrollToTop(
+                _scrollController, _scrollController.offset ~/ 10);
           },
           backgroundColor: Colors.white,
           elevation: 2,

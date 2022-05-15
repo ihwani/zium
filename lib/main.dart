@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/inputdata/bottom_navigation.dart';
 import 'package:zium/screens/bookmark_screen.dart';
@@ -18,6 +19,13 @@ void main() async {
   await Hive.initFlutter();
   await Hive.openBox('BookMark');
   await Hive.openBox('Favorite');
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
   runApp(
     GetMaterialApp(
       initialRoute: '/',

@@ -13,13 +13,12 @@ class TagScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     final controller = Get.put(
       Controller(),
     );
     getSearch(controller.postList, Get.arguments);
 
-    int widthAxisCount = size.width ~/ 300;
+    int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
 
     String _argumentsData = Get.arguments;
@@ -66,6 +65,8 @@ class TagScreen extends StatelessWidget {
                   child: GestureDetector(
                     onTap: () {
                       Get.toNamed('/select', arguments: foundList[index]);
+                      // ignore: avoid_print
+                      print(foundList[index]['id']);
                     },
                     child: ExtendedImage.network(
                       foundList[index]['image_link'],
@@ -86,7 +87,8 @@ class TagScreen extends StatelessWidget {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(_scrollController);
+            controller.scrollToTop(
+                _scrollController, _scrollController.offset ~/ 10);
           },
           backgroundColor: Colors.white,
           elevation: 2,
