@@ -32,6 +32,7 @@ class TagScreen extends StatelessWidget {
         title: Text(
           '#' + _argumentsData.toString(),
           style: const TextStyle(color: Colors.black),
+          overflow: TextOverflow.ellipsis,
         ),
         actions: [
           Padding(

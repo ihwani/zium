@@ -86,6 +86,7 @@ class FeedScreen extends StatelessWidget {
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.bold,
                                                 fontSize: 16),
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),
@@ -116,16 +117,21 @@ class FeedScreen extends StatelessWidget {
                                       const SizedBox(
                                         width: 8,
                                       ),
-                                      Text(controller.postList[index]
-                                          ['location'])
+                                      Text(
+                                        controller.postList[index]['location'],
+                                        overflow: TextOverflow.ellipsis,
+                                      )
                                     ],
                                   ),
                                 ),
                                 ListTile(
                                   leading: Padding(
                                     padding: const EdgeInsets.only(left: 32.0),
-                                    child: Text(controller.postList[index]
-                                        ['project_name']),
+                                    child: Text(
+                                      controller.postList[index]
+                                          ['project_name'],
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
                                   ),
                                   trailing:
                                       //북마크 저장

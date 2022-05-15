@@ -5,6 +5,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
+import 'dart:io';
 
 class SelectFeedScreen extends StatelessWidget {
   const SelectFeedScreen({Key? key}) : super(key: key);
@@ -50,9 +51,11 @@ class SelectFeedScreen extends StatelessWidget {
                 child: Text(
                   _argumentsData['design_office'],
                   style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 16,
+                  ),
+                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
@@ -76,14 +79,6 @@ class SelectFeedScreen extends StatelessWidget {
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-          Container(
-            padding: const EdgeInsets.symmetric(
-              vertical: 4,
-              horizontal: 16,
-            ).copyWith(
-              right: 0,
-            ),
-          ),
           Padding(
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Center(
@@ -109,13 +104,19 @@ class SelectFeedScreen extends StatelessWidget {
               const SizedBox(
                 width: 8,
               ),
-              Text(_argumentsData['location'])
+              Text(
+                _argumentsData['location'],
+                overflow: TextOverflow.ellipsis,
+              )
             ]),
           ),
           ListTile(
               leading: Padding(
                 padding: const EdgeInsets.only(left: 32.0),
-                child: Text(_argumentsData['project_name']),
+                child: Text(
+                  _argumentsData['project_name'],
+                  overflow: TextOverflow.ellipsis,
+                ),
               ),
               trailing:
                   //북마크 저장

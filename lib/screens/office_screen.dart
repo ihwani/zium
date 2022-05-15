@@ -77,7 +77,11 @@ class OfficeScreen extends StatelessWidget {
         title: Text(
           foundList[0]['design_office'],
           style: const TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 20),
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 20,
+            overflow: TextOverflow.ellipsis,
+          ),
         ),
         actions: [
           Padding(
@@ -99,7 +103,10 @@ class OfficeScreen extends StatelessWidget {
           SizedBox(
             height: 30,
             child: Center(
-              child: Text('${foundList.length}개의 프로젝트가 등록되었습니다.'),
+              child: Text(
+                '${foundList.length}개의 프로젝트가 등록되었습니다.',
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
           Expanded(
@@ -155,7 +162,8 @@ class OfficeScreen extends StatelessWidget {
                   children: [
                     Text(
                       foundList[0]['design_office'],
-                      style: const TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 16),
+                      overflow: TextOverflow.ellipsis,
                     ),
                     //북마크 버튼
                     Obx(
