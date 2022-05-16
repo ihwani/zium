@@ -81,7 +81,7 @@ class SelectFeedScreen extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: () {
-                  launchURL(_argumentsData['project_link']);
+                  Get.toNamed('select_image', arguments: _argumentsData);
                 },
                 child: ExtendedImage.network(
                   _argumentsData['image_link'],

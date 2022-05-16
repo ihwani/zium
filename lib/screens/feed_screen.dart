@@ -15,7 +15,7 @@ class FeedScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(Controller());
-    int widthAxisCount = context.width ~/ 400;
+    int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 1 ? widthAxisCount : 1;
     return Scaffold(
       body: RefreshIndicator(
@@ -97,8 +97,9 @@ class FeedScreen extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(8, 0, 8, 8),
                                   child: GestureDetector(
                                     onTap: () {
-                                      launchURL(controller.postList[index]
-                                          ['project_link']);
+                                      Get.toNamed('select_image',
+                                          arguments:
+                                              controller.postList[index]);
                                     },
                                     child: ExtendedImage.network(
                                       controller.postList[index]['image_link'],
