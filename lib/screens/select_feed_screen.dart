@@ -11,7 +11,9 @@ class SelectFeedScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(Controller());
+    final controller = Get.put(
+      Controller(),
+    );
     Map _argumentsData = Get.arguments;
 
     return Scaffold(
@@ -89,7 +91,9 @@ class SelectFeedScreen extends StatelessWidget {
                   cache: true,
                   width: context.width,
                   shape: BoxShape.rectangle,
-                  borderRadius: const BorderRadius.all(Radius.circular(16)),
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(16),
+                  ),
                 ),
               ),
             ),

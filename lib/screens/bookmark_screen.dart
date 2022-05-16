@@ -11,7 +11,9 @@ class BookmarkScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(Controller());
+    final controller = Get.put(
+      Controller(),
+    );
 
     int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
@@ -179,6 +181,7 @@ class BookmarkScreen extends StatelessWidget {
           Expanded(
             child: AnimationLimiter(
               child: MasonryGridView.count(
+                controller: controller.scrollController.value,
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 itemCount: controller.bookMark.length,
                 crossAxisCount: _axiisCount,
@@ -216,6 +219,25 @@ class BookmarkScreen extends StatelessWidget {
           ),
         ],
       ),
+      floatingActionButton: SizedBox(
+        height: 30,
+        width: 30,
+        child: FloatingActionButton(
+          onPressed: () {
+            controller.scrollToTop(controller.scrollController.value,
+                controller.scrollController.value.offset ~/ 10);
+          },
+          backgroundColor: Colors.white,
+          elevation: 2,
+          child: const Icon(
+            Icons.keyboard_arrow_up_sharp,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: context.width < 600
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.centerFloat,
     );
   }
 }

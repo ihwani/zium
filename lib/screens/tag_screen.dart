@@ -9,7 +9,8 @@ import 'package:zium/util/util.dart';
 // ignore: must_be_immutable
 class TagScreen extends StatelessWidget {
   TagScreen({Key? key}) : super(key: key);
-  final ScrollController _scrollController = ScrollController();
+
+  var _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +99,9 @@ class TagScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: context.width < 600
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.centerFloat,
     );
   }
 }

@@ -9,7 +9,9 @@ class SupportScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(Controller());
+    final controller = Get.put(
+      Controller(),
+    );
 
     void _sendEmail() async {
       final Email email = Email(

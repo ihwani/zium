@@ -30,11 +30,11 @@ void main() async {
     GetMaterialApp(
       initialRoute: '/',
       getPages: [
-        GetPage(name: '/', page: () => FeedScreen()),
+        GetPage(name: '/', page: () => const FeedScreen()),
         GetPage(name: '/select', page: () => const SelectFeedScreen()),
         GetPage(name: '/search', page: () => const SearchScreen()),
         GetPage(name: '/support', page: () => const SupportScreen()),
-        GetPage(name: '/office', page: () => const OfficeScreen()),
+        GetPage(name: '/office', page: () => OfficeScreen()),
         GetPage(name: '/tag', page: () => TagScreen()),
         GetPage(name: '/bookmark', page: () => const BookmarkScreen()),
         GetPage(name: '/select_image', page: () => const SelectImageScreen()),

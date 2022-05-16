@@ -9,12 +9,13 @@ import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
 class FeedScreen extends StatelessWidget {
-  FeedScreen({Key? key}) : super(key: key);
-  final ScrollController _scrollController = ScrollController();
+  const FeedScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(Controller());
+    final controller = Get.put(
+      Controller(),
+    );
     int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 1 ? widthAxisCount : 1;
     return Scaffold(
@@ -30,7 +31,7 @@ class FeedScreen extends StatelessWidget {
             child: Obx(
               () => AnimationLimiter(
                 child: MasonryGridView.count(
-                  controller: _scrollController,
+                  controller: controller.scrollController.value,
                   itemCount: controller.postList.length,
                   crossAxisCount: _axiisCount,
                   mainAxisSpacing: 8,
@@ -224,8 +225,8 @@ class FeedScreen extends StatelessWidget {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(
-                _scrollController, _scrollController.offset ~/ 10);
+            controller.scrollToTop(controller.scrollController.value,
+                controller.scrollController.value.offset ~/ 10);
           },
           backgroundColor: Colors.white,
           elevation: 2,
@@ -235,7 +236,9 @@ class FeedScreen extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: context.width < 600
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.centerFloat,
     );
   }
 }

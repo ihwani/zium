@@ -10,7 +10,9 @@ import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
 class OfficeScreen extends StatelessWidget {
-  const OfficeScreen({Key? key}) : super(key: key);
+  OfficeScreen({Key? key}) : super(key: key);
+
+  var _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -112,6 +114,7 @@ class OfficeScreen extends StatelessWidget {
             child: AnimationLimiter(
               child: MasonryGridView.count(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
+                controller: _scrollController,
                 itemCount: foundList.length,
                 crossAxisCount: _axiisCount,
                 mainAxisSpacing: 8,
@@ -323,6 +326,25 @@ class OfficeScreen extends StatelessWidget {
           ],
         ),
       ),
+      floatingActionButton: SizedBox(
+        height: 30,
+        width: 30,
+        child: FloatingActionButton(
+          onPressed: () {
+            controller.scrollToTop(
+                _scrollController, _scrollController.offset ~/ 10);
+          },
+          backgroundColor: Colors.white,
+          elevation: 2,
+          child: const Icon(
+            Icons.keyboard_arrow_up_sharp,
+            color: Colors.black,
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: context.width < 600
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.centerFloat,
     );
   }
 }

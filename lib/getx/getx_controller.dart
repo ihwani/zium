@@ -5,6 +5,7 @@ import 'package:zium/screens/feed_screen.dart';
 import 'package:zium/screens/search_screen.dart';
 
 class Controller extends GetxController {
+  var scrollController = ScrollController().obs;
   RxInt currentIndex = 0.obs;
 
   scrollToTop(c, int t) {

@@ -14,8 +14,9 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final ScrollController _scrollController = ScrollController();
-  final controller = Get.put(Controller());
+  final controller = Get.put(
+    Controller(),
+  );
   //검색 함수
   void _runFilter(String enteredKeyword) {
     List searchList = controller.postList;
@@ -66,7 +67,7 @@ class _SearchScreenState extends State<SearchScreen> {
       //검색 결과
       body: AnimationLimiter(
         child: MasonryGridView.count(
-          controller: _scrollController,
+          controller: controller.scrollController.value,
           padding: const EdgeInsets.symmetric(horizontal: 8),
           itemCount: keywordList.length,
           crossAxisCount: _axiisCount,
@@ -102,8 +103,8 @@ class _SearchScreenState extends State<SearchScreen> {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(
-                _scrollController, _scrollController.offset ~/ 10);
+            controller.scrollToTop(controller.scrollController.value,
+                controller.scrollController.value.offset ~/ 10);
           },
           backgroundColor: Colors.white,
           elevation: 2,
@@ -113,7 +114,9 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: context.width < 600
+          ? FloatingActionButtonLocation.endFloat
+          : FloatingActionButtonLocation.centerFloat,
     );
   }
 }
