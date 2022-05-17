@@ -74,13 +74,19 @@ class FeedScreen extends StatelessWidget {
                                         padding: const EdgeInsets.only(left: 8),
                                         child: TextButton(
                                           onPressed: () {
+                                            officeList = controller.postList
+                                                .where(
+                                                  (element) => element
+                                                      .toString()
+                                                      .contains(
+                                                        controller
+                                                                .postList[index]
+                                                            ['office_id'],
+                                                      ),
+                                                )
+                                                .toList();
                                             Get.toNamed(
                                               "/office",
-                                              arguments: {
-                                                "office":
-                                                    controller.postList[index]
-                                                        ['office_id']
-                                              },
                                             );
                                           },
                                           child: Text(
@@ -102,13 +108,9 @@ class FeedScreen extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(8, 0, 8, 8),
                                   child: GestureDetector(
                                     onTap: () {
-                                      Get.toNamed(
-                                        'select_image',
-                                        arguments: {
-                                          "select_image":
-                                              controller.postList[index]
-                                        },
-                                      );
+                                      Get.toNamed('select_image',
+                                          arguments:
+                                              controller.postList[index]);
                                     },
                                     child: ExtendedImage.network(
                                       controller.postList[index]['image_link'],
@@ -193,14 +195,21 @@ class FeedScreen extends StatelessWidget {
                                                     Colors.blue.shade50,
                                               ),
                                               onPressed: () {
-                                                Get.toNamed(
-                                                  '/tag',
-                                                  arguments: {
-                                                    "tag": controller
-                                                            .postList[index]
-                                                        ['tag'][idx]
-                                                  },
-                                                );
+                                                tagList = controller.postList
+                                                    .where(
+                                                      (element) => element
+                                                          .toString()
+                                                          .contains(
+                                                            controller.postList[
+                                                                    index]
+                                                                ['tag'][idx],
+                                                          ),
+                                                    )
+                                                    .toList();
+                                                tagName =
+                                                    controller.postList[index]
+                                                        ['tag'][idx];
+                                                Get.toNamed("/tag");
                                               },
                                               child: Text(
                                                 '# ' +

@@ -16,8 +16,6 @@ class TagScreen extends StatelessWidget {
     final controller = Get.put(
       Controller(),
     );
-    var _argumentsData = Get.arguments["tag"];
-    getSearch(controller.postList, _argumentsData);
 
     int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
@@ -28,7 +26,7 @@ class TagScreen extends StatelessWidget {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          '#' + _argumentsData,
+          '#' + tagName,
           style: const TextStyle(color: Colors.black),
           overflow: TextOverflow.ellipsis,
         ),
@@ -50,7 +48,7 @@ class TagScreen extends StatelessWidget {
         child: MasonryGridView.count(
           controller: _scrollController,
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          itemCount: foundList.length,
+          itemCount: tagList.length,
           crossAxisCount: _axiisCount,
           mainAxisSpacing: 8,
           crossAxisSpacing: 8,
@@ -63,11 +61,13 @@ class TagScreen extends StatelessWidget {
                 child: FadeInAnimation(
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed('/select',
-                          arguments: {"select": foundList[index]});
+                      Get.toNamed(
+                        '/select',
+                        arguments: tagList[index],
+                      );
                     },
                     child: ExtendedImage.network(
-                      foundList[index]['image_link'],
+                      tagList[index]['image_link'],
                       fit: BoxFit.cover,
                       cache: true,
                       shape: BoxShape.rectangle,

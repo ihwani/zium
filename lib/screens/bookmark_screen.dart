@@ -5,6 +5,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:zium/getx/getx_controller.dart';
+import 'package:zium/util/util.dart';
 
 class BookmarkScreen extends StatelessWidget {
   const BookmarkScreen({Key? key}) : super(key: key);
@@ -94,8 +95,16 @@ class BookmarkScreen extends StatelessWidget {
                   itemBuilder: ((context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed('/office',
-                            arguments: controller.keyList[index]);
+                        officeList = controller.postList
+                            .where(
+                              (element) => element.toString().contains(
+                                    controller.keyList[index],
+                                  ),
+                            )
+                            .toList();
+                        Get.toNamed(
+                          "/office",
+                        );
                       },
                       child: Card(
                         child: SizedBox(

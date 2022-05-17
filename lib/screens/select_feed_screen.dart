@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/getx/getx_controller.dart';
+import 'package:zium/util/util.dart';
 
 class SelectFeedScreen extends StatelessWidget {
   const SelectFeedScreen({Key? key}) : super(key: key);
@@ -13,7 +14,7 @@ class SelectFeedScreen extends StatelessWidget {
     final controller = Get.put(
       Controller(),
     );
-    var _argumentsData = Get.arguments["select"];
+    var _argumentsData = Get.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -43,8 +44,16 @@ class SelectFeedScreen extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: TextButton(
                 onPressed: () {
-                  Get.toNamed("/office",
-                      arguments: {"office": _argumentsData['office_id']});
+                  officeList = controller.postList
+                      .where(
+                        (element) => element.toString().contains(
+                              _argumentsData['office_id'],
+                            ),
+                      )
+                      .toList();
+                  Get.toNamed(
+                    "/office",
+                  );
                 },
                 child: Text(
                   _argumentsData['design_office'],
@@ -158,8 +167,15 @@ class SelectFeedScreen extends StatelessWidget {
                         backgroundColor: Colors.blue.shade50,
                       ),
                       onPressed: () {
-                        Get.toNamed('/tag',
-                            arguments: _argumentsData['tag'][idx]);
+                        tagList = controller.postList
+                            .where(
+                              (element) => element.toString().contains(
+                                    _argumentsData['tag'][idx],
+                                  ),
+                            )
+                            .toList();
+                        tagName = _argumentsData['tag'][idx];
+                        Get.toNamed("/tag");
                       },
                       child: Text(
                         '# ' + _argumentsData['tag'][idx],

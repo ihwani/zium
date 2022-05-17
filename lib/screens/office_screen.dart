@@ -1,6 +1,5 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -20,56 +19,10 @@ class OfficeScreen extends StatelessWidget {
       Controller(),
     );
 
-    var _argumentsData = Get.arguments["office"];
-    getSearch(controller.postList, _argumentsData);
+    var _officeData = officeList[0];
 
     int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
-    var officeData = foundList[0];
-    print(officeData);
-
-    void _sendEmail() async {
-      final Email email = Email(
-        subject: '[설계 문의]',
-        recipients: [officeData['email']],
-        isHTML: false,
-      );
-
-      try {
-        await FlutterEmailSender.send(email);
-      } catch (error) {
-        return showDialog(
-          context: context,
-          builder: (context) => Dialog(
-            child: SizedBox(
-              height: 240,
-              width: 100,
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const Text(
-                          '죄송합니다.\n\n기본 메일 앱을 사용할 수 없기 때문에\n앱에서 바로 문의를 전송하기가\n어려운 상황입니다.\n\n불편을 드려 죄송합니다.',
-                          style: TextStyle(fontSize: 16)),
-                      const SizedBox(
-                        height: 6,
-                      ),
-                      Center(
-                        child: TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('확인'),
-                        ),
-                      ),
-                    ]),
-              ),
-            ),
-          ),
-        );
-      }
-    }
 
     return Scaffold(
       appBar: AppBar(
@@ -78,7 +31,7 @@ class OfficeScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          officeData['design_office'],
+          _officeData['design_office'],
           style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -107,7 +60,7 @@ class OfficeScreen extends StatelessWidget {
             height: 30,
             child: Center(
               child: Text(
-                '${foundList.length}개의 프로젝트가 등록되었습니다.',
+                '${officeList.length}개의 프로젝트가 등록되었습니다.',
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -117,7 +70,7 @@ class OfficeScreen extends StatelessWidget {
               child: MasonryGridView.count(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 controller: _scrollController,
-                itemCount: foundList.length,
+                itemCount: officeList.length,
                 crossAxisCount: _axiisCount,
                 mainAxisSpacing: 8,
                 crossAxisSpacing: 8,
@@ -132,11 +85,11 @@ class OfficeScreen extends StatelessWidget {
                           onTap: () {
                             Get.toNamed(
                               '/select',
-                              arguments: {"select": foundList[index]},
+                              arguments: officeList[index],
                             );
                           },
                           child: ExtendedImage.network(
-                            foundList[index]['image_link'],
+                            officeList[index]['image_link'],
                             fit: BoxFit.cover,
                             cache: true,
                             shape: BoxShape.rectangle,
@@ -168,7 +121,7 @@ class OfficeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      officeData['design_office'],
+                      _officeData['design_office'],
                       style: const TextStyle(fontSize: 16),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -183,13 +136,15 @@ class OfficeScreen extends StatelessWidget {
                               onPressed: () {
                                 List result = [];
                                 result.addAll(controller.favorite.keys);
-                                if (result.contains(_argumentsData)) {
-                                  controller.favorite.remove(_argumentsData);
+                                if (result.contains(_officeData['office_id'])) {
+                                  controller.favorite
+                                      .remove(_officeData['office_id']);
                                   Hive.box('Favorite')
                                       .put('Favorite', controller.favorite);
                                 } else {
-                                  controller.favorite[_argumentsData] =
-                                      officeData['ic_link'];
+                                  controller
+                                          .favorite[_officeData['office_id']] =
+                                      _officeData['ic_link'];
                                   Hive.box('Favorite')
                                       .put('Favorite', controller.favorite);
                                 }
@@ -199,7 +154,7 @@ class OfficeScreen extends StatelessWidget {
                               },
                               icon: controller.favorite
                                       .toString()
-                                      .contains(_argumentsData)
+                                      .contains(_officeData['office_id'])
                                   ? const Icon(Icons.star, color: Colors.red)
                                   : const Icon(
                                       Icons.star_border,
@@ -238,7 +193,7 @@ class OfficeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ExtendedImage.network(
-                    officeData['ic_link'],
+                    _officeData['ic_link'],
                     cache: true,
                   ),
                 ),
@@ -254,11 +209,11 @@ class OfficeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: officeData['office_boss'].length,
+                      itemCount: _officeData['office_boss'].length,
                       itemBuilder: (context, idx) {
                         return Text(idx > 0
-                            ? ', ' + officeData['office_boss'][idx]
-                            : officeData['office_boss'][idx]);
+                            ? ', ' + _officeData['office_boss'][idx]
+                            : _officeData['office_boss'][idx]);
                       },
                     ),
                   ),
@@ -271,13 +226,13 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    String _num = officeData['phone_number'];
+                    String _num = _officeData['phone_number'];
                     _num = _num.replaceAll(")", "");
                     _num = _num.replaceAll("-", "");
                     callNumber(_num);
                   },
                   child: Text(
-                    officeData['phone_number'],
+                    _officeData['phone_number'],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
@@ -289,10 +244,10 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    _sendEmail();
+                    sendEmail();
                   },
                   child: Text(
-                    officeData['email'],
+                    _officeData['email'],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
@@ -305,7 +260,7 @@ class OfficeScreen extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {},
                   child: WordBreakText(
-                    office_addressList[officeData['office_id']],
+                    office_addressList[_officeData['office_id']],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
@@ -317,10 +272,10 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    launchURL(officeData['homepage_link']);
+                    launchURL(_officeData['homepage_link']);
                   },
                   child: Text(
-                    officeData['homepage_link'],
+                    _officeData['homepage_link'],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
