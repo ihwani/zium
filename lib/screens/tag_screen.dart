@@ -61,9 +61,9 @@ class TagScreen extends StatelessWidget {
                 child: FadeInAnimation(
                   child: GestureDetector(
                     onTap: () {
+                      selectMap = tagList[index];
                       Get.toNamed(
                         '/select',
-                        arguments: tagList[index],
                       );
                     },
                     child: ExtendedImage.network(
