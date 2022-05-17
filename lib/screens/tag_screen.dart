@@ -6,23 +6,21 @@ import 'package:get/get.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/util/util.dart';
 
-// ignore: must_be_immutable
 class TagScreen extends StatelessWidget {
   TagScreen({Key? key}) : super(key: key);
 
-  var _scrollController = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(
       Controller(),
     );
-    getSearch(controller.postList, Get.arguments);
+    var _argumentsData = Get.arguments["tag"];
+    getSearch(controller.postList, _argumentsData);
 
     int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
-
-    String _argumentsData = Get.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -30,7 +28,7 @@ class TagScreen extends StatelessWidget {
         elevation: 0,
         automaticallyImplyLeading: false,
         title: Text(
-          '#' + _argumentsData.toString(),
+          '#' + _argumentsData,
           style: const TextStyle(color: Colors.black),
           overflow: TextOverflow.ellipsis,
         ),
@@ -65,9 +63,8 @@ class TagScreen extends StatelessWidget {
                 child: FadeInAnimation(
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed('/select', arguments: foundList[index]);
-                      // ignore: avoid_print
-                      print(foundList[index]['id']);
+                      Get.toNamed('/select',
+                          arguments: {"select": foundList[index]});
                     },
                     child: ExtendedImage.network(
                       foundList[index]['image_link'],

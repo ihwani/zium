@@ -12,24 +12,26 @@ import 'package:zium/util/util.dart';
 class OfficeScreen extends StatelessWidget {
   OfficeScreen({Key? key}) : super(key: key);
 
-  var _scrollController = ScrollController();
+  final _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     final controller = Get.put(
       Controller(),
     );
-    getSearch(controller.postList, Get.arguments);
+
+    var _argumentsData = Get.arguments["office"];
+    getSearch(controller.postList, _argumentsData);
 
     int widthAxisCount = context.width ~/ 300;
     int _axiisCount = widthAxisCount > 2 ? widthAxisCount : 2;
-
-    String _argumentsData = Get.arguments;
+    var officeData = foundList[0];
+    print(officeData);
 
     void _sendEmail() async {
       final Email email = Email(
         subject: '[설계 문의]',
-        recipients: [foundList[0]['email']],
+        recipients: [officeData['email']],
         isHTML: false,
       );
 
@@ -76,7 +78,7 @@ class OfficeScreen extends StatelessWidget {
         elevation: 0,
         centerTitle: false,
         title: Text(
-          foundList[0]['design_office'],
+          officeData['design_office'],
           style: const TextStyle(
             color: Colors.black,
             fontWeight: FontWeight.bold,
@@ -128,9 +130,10 @@ class OfficeScreen extends StatelessWidget {
                       child: FadeInAnimation(
                         child: GestureDetector(
                           onTap: () {
-                            Get.toNamed('/select', arguments: foundList[index]);
-                            // ignore: avoid_print
-                            print(foundList[index]['id']);
+                            Get.toNamed(
+                              '/select',
+                              arguments: {"select": foundList[index]},
+                            );
                           },
                           child: ExtendedImage.network(
                             foundList[index]['image_link'],
@@ -165,7 +168,7 @@ class OfficeScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Text(
-                      foundList[0]['design_office'],
+                      officeData['design_office'],
                       style: const TextStyle(fontSize: 16),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -186,7 +189,7 @@ class OfficeScreen extends StatelessWidget {
                                       .put('Favorite', controller.favorite);
                                 } else {
                                   controller.favorite[_argumentsData] =
-                                      foundList[0]['ic_link'];
+                                      officeData['ic_link'];
                                   Hive.box('Favorite')
                                       .put('Favorite', controller.favorite);
                                 }
@@ -235,7 +238,7 @@ class OfficeScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: ExtendedImage.network(
-                    foundList[0]['ic_link'],
+                    officeData['ic_link'],
                     cache: true,
                   ),
                 ),
@@ -251,11 +254,11 @@ class OfficeScreen extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 8.0),
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
-                      itemCount: foundList[0]['office_boss'].length,
+                      itemCount: officeData['office_boss'].length,
                       itemBuilder: (context, idx) {
                         return Text(idx > 0
-                            ? ', ' + foundList[0]['office_boss'][idx]
-                            : foundList[0]['office_boss'][idx]);
+                            ? ', ' + officeData['office_boss'][idx]
+                            : officeData['office_boss'][idx]);
                       },
                     ),
                   ),
@@ -268,13 +271,13 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    String _num = foundList[0]['phone_number'];
+                    String _num = officeData['phone_number'];
                     _num = _num.replaceAll(")", "");
                     _num = _num.replaceAll("-", "");
                     callNumber(_num);
                   },
                   child: Text(
-                    foundList[0]['phone_number'],
+                    officeData['phone_number'],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
@@ -289,7 +292,7 @@ class OfficeScreen extends StatelessWidget {
                     _sendEmail();
                   },
                   child: Text(
-                    foundList[0]['email'],
+                    officeData['email'],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
@@ -302,7 +305,7 @@ class OfficeScreen extends StatelessWidget {
                 child: TextButton(
                   onPressed: () {},
                   child: WordBreakText(
-                    office_addressList[foundList[0]['office_id']],
+                    office_addressList[officeData['office_id']],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),
@@ -314,10 +317,10 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    launchURL(foundList[0]['homepage_link']);
+                    launchURL(officeData['homepage_link']);
                   },
                   child: Text(
-                    foundList[0]['homepage_link'],
+                    officeData['homepage_link'],
                     style: const TextStyle(color: Colors.black),
                   ),
                 ),

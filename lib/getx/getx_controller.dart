@@ -14,7 +14,7 @@ class Controller extends GetxController {
   }
 
   final pageList = [
-    FeedScreen(),
+    const FeedScreen(),
     const SearchScreen(),
     const BookmarkScreen(),
   ].obs;

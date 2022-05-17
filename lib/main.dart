@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:zium/getx/getx_controller.dart';
 import 'package:zium/inputdata/bottom_navigation.dart';
@@ -20,12 +19,6 @@ import 'package:zium/util/util.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialization(null);
-  SystemChrome.setPreferredOrientations(
-    [
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ],
-  );
   runApp(
     GetMaterialApp(
       initialRoute: '/',

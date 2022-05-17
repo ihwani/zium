@@ -42,8 +42,7 @@ getSaveData(a, b) {
 getSearch(c, s) {
   foundList = c
       .where(
-        (element) => element.toString().contains(s),
+        (element) => element.toString().contains(s.toString()),
       )
       .toList();
-  foundList.shuffle();
 }

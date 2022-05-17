@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:zium/getx/getx_controller.dart';
-import 'package:zium/util/util.dart';
 
 class SelectFeedScreen extends StatelessWidget {
   const SelectFeedScreen({Key? key}) : super(key: key);
@@ -14,7 +13,7 @@ class SelectFeedScreen extends StatelessWidget {
     final controller = Get.put(
       Controller(),
     );
-    Map _argumentsData = Get.arguments;
+    var _argumentsData = Get.arguments["select"];
 
     return Scaffold(
       appBar: AppBar(
@@ -45,7 +44,7 @@ class SelectFeedScreen extends StatelessWidget {
               child: TextButton(
                 onPressed: () {
                   Get.toNamed("/office",
-                      arguments: _argumentsData['office_id']);
+                      arguments: {"office": _argumentsData['office_id']});
                 },
                 child: Text(
                   _argumentsData['design_office'],
@@ -83,7 +82,8 @@ class SelectFeedScreen extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: () {
-                  Get.toNamed('select_image', arguments: _argumentsData);
+                  Get.toNamed('select_image',
+                      arguments: {"select_image": _argumentsData});
                 },
                 child: ExtendedImage.network(
                   _argumentsData['image_link'],

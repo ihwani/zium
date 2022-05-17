@@ -74,10 +74,14 @@ class FeedScreen extends StatelessWidget {
                                         padding: const EdgeInsets.only(left: 8),
                                         child: TextButton(
                                           onPressed: () {
-                                            Get.toNamed("/office",
-                                                arguments:
+                                            Get.toNamed(
+                                              "/office",
+                                              arguments: {
+                                                "office":
                                                     controller.postList[index]
-                                                        ['office_id']);
+                                                        ['office_id']
+                                              },
+                                            );
                                           },
                                           child: Text(
                                             controller.postList[index]
@@ -98,9 +102,13 @@ class FeedScreen extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(8, 0, 8, 8),
                                   child: GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('select_image',
-                                          arguments:
-                                              controller.postList[index]);
+                                      Get.toNamed(
+                                        'select_image',
+                                        arguments: {
+                                          "select_image":
+                                              controller.postList[index]
+                                        },
+                                      );
                                     },
                                     child: ExtendedImage.network(
                                       controller.postList[index]['image_link'],
@@ -185,10 +193,14 @@ class FeedScreen extends StatelessWidget {
                                                     Colors.blue.shade50,
                                               ),
                                               onPressed: () {
-                                                Get.toNamed('/tag',
-                                                    arguments: controller
+                                                Get.toNamed(
+                                                  '/tag',
+                                                  arguments: {
+                                                    "tag": controller
                                                             .postList[index]
-                                                        ['tag'][idx]);
+                                                        ['tag'][idx]
+                                                  },
+                                                );
                                               },
                                               child: Text(
                                                 '# ' +
