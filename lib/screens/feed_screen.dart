@@ -108,9 +108,8 @@ class FeedScreen extends StatelessWidget {
                                       const EdgeInsets.fromLTRB(8, 0, 8, 8),
                                   child: GestureDetector(
                                     onTap: () {
-                                      Get.toNamed('select_image',
-                                          arguments:
-                                              controller.postList[index]);
+                                      selectMap = controller.postList[index];
+                                      Get.toNamed('select_image');
                                     },
                                     child: ExtendedImage.network(
                                       controller.postList[index]['image_link'],

@@ -8,8 +8,6 @@ class SelectImageScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var _argumentsData = Get.arguments["select_image"];
-
     return SafeArea(
       child: Stack(children: [
         Center(
@@ -22,7 +20,7 @@ class SelectImageScreen extends StatelessWidget {
                 height: context.height,
                 padding: const EdgeInsets.all(16),
                 child: ExtendedImage.network(
-                  _argumentsData['image_link'],
+                  selectMap['image_link'],
                   cache: true,
                 ),
               ),
@@ -35,7 +33,7 @@ class SelectImageScreen extends StatelessWidget {
             alignment: Alignment.bottomLeft,
             child: OutlinedButton(
               onPressed: () {
-                launchURL(_argumentsData['project_link']);
+                launchURL(selectMap['project_link']);
               },
               child: Container(
                 width: 200,

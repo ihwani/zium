@@ -6,6 +6,7 @@ import 'package:zium/screens/search_screen.dart';
 
 class Controller extends GetxController {
   var scrollController = ScrollController().obs;
+  // ignore: non_constant_identifier_names
   var tag_scrollController = ScrollController().obs;
   RxInt currentIndex = 0.obs;
 

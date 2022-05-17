@@ -205,9 +205,9 @@ class BookmarkScreen extends StatelessWidget {
                       child: FadeInAnimation(
                         child: GestureDetector(
                           onTap: () {
+                            selectMap = controller.bookMark[index];
                             Get.toNamed(
                               '/select',
-                              arguments: controller.bookMark[index],
                             );
                           },
                           child: ExtendedImage.network(

@@ -14,7 +14,6 @@ class SelectFeedScreen extends StatelessWidget {
     final controller = Get.put(
       Controller(),
     );
-    var _argumentsData = Get.arguments;
 
     return Scaffold(
       appBar: AppBar(
@@ -35,7 +34,7 @@ class SelectFeedScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: ExtendedImage.network(
-                  _argumentsData['ic_link'],
+                  selectMap['ic_link'],
                   cache: true,
                 ),
               ),
@@ -47,7 +46,7 @@ class SelectFeedScreen extends StatelessWidget {
                   officeList = controller.postList
                       .where(
                         (element) => element.toString().contains(
-                              _argumentsData['office_id'],
+                              selectMap['office_id'],
                             ),
                       )
                       .toList();
@@ -56,7 +55,7 @@ class SelectFeedScreen extends StatelessWidget {
                   );
                 },
                 child: Text(
-                  _argumentsData['design_office'],
+                  selectMap['design_office'],
                   style: const TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.bold,
@@ -91,11 +90,10 @@ class SelectFeedScreen extends StatelessWidget {
             child: Center(
               child: GestureDetector(
                 onTap: () {
-                  Get.toNamed('select_image',
-                      arguments: {"select_image": _argumentsData});
+                  Get.toNamed('select_image');
                 },
                 child: ExtendedImage.network(
-                  _argumentsData['image_link'],
+                  selectMap['image_link'],
                   fit: BoxFit.contain,
                   cache: true,
                   width: context.width,
@@ -115,7 +113,7 @@ class SelectFeedScreen extends StatelessWidget {
                 width: 8,
               ),
               Text(
-                _argumentsData['location'],
+                selectMap['location'],
                 overflow: TextOverflow.ellipsis,
               )
             ]),
@@ -124,7 +122,7 @@ class SelectFeedScreen extends StatelessWidget {
               leading: Padding(
                 padding: const EdgeInsets.only(left: 32.0),
                 child: Text(
-                  _argumentsData['project_name'],
+                  selectMap['project_name'],
                   overflow: TextOverflow.ellipsis,
                 ),
               ),
@@ -135,17 +133,15 @@ class SelectFeedScreen extends StatelessWidget {
                   onPressed: () {
                     if (controller.bookMark
                         .toString()
-                        .contains(_argumentsData['id'])) {
-                      controller.bookMark.remove(_argumentsData);
+                        .contains(selectMap['id'])) {
+                      controller.bookMark.remove(selectMap);
                       Hive.box('BookMark').put('BookMark', controller.bookMark);
                     } else {
-                      controller.bookMark.add(_argumentsData);
+                      controller.bookMark.add(selectMap);
                       Hive.box('BookMark').put('BookMark', controller.bookMark);
                     }
                   },
-                  icon: controller.bookMark
-                          .toString()
-                          .contains(_argumentsData['id'])
+                  icon: controller.bookMark.toString().contains(selectMap['id'])
                       ? const Icon(Icons.bookmark, color: Colors.red)
                       : const Icon(
                           Icons.bookmark_border,
@@ -159,7 +155,7 @@ class SelectFeedScreen extends StatelessWidget {
               height: 40,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: _argumentsData['tag'].length,
+                itemCount: selectMap['tag'].length,
                 itemBuilder: (context, idx) {
                   return Row(children: [
                     TextButton(
@@ -170,15 +166,15 @@ class SelectFeedScreen extends StatelessWidget {
                         tagList = controller.postList
                             .where(
                               (element) => element.toString().contains(
-                                    _argumentsData['tag'][idx],
+                                    selectMap['tag'][idx],
                                   ),
                             )
                             .toList();
-                        tagName = _argumentsData['tag'][idx];
+                        tagName = selectMap['tag'][idx];
                         Get.toNamed("/tag");
                       },
                       child: Text(
-                        '# ' + _argumentsData['tag'][idx],
+                        '# ' + selectMap['tag'][idx],
                         style: const TextStyle(color: Colors.black),
                       ),
                     ),

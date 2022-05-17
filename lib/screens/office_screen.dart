@@ -1,5 +1,6 @@
 import 'package:extended_image/extended_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_email_sender/flutter_email_sender.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -83,9 +84,9 @@ class OfficeScreen extends StatelessWidget {
                       child: FadeInAnimation(
                         child: GestureDetector(
                           onTap: () {
+                            selectMap = officeList[index];
                             Get.toNamed(
                               '/select',
-                              arguments: officeList[index],
                             );
                           },
                           child: ExtendedImage.network(
@@ -244,7 +245,7 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    sendEmail();
+                    _sendEmail();
                   },
                   child: Text(
                     _officeData['email'],
@@ -304,5 +305,51 @@ class OfficeScreen extends StatelessWidget {
           ? FloatingActionButtonLocation.endFloat
           : FloatingActionButtonLocation.centerFloat,
     );
+  }
+}
+
+//이메일 보내기
+void _sendEmail() async {
+  final Email email = Email(
+    subject: '[설계 문의]',
+    recipients: [officeList[0]['email']],
+    isHTML: false,
+  );
+
+  try {
+    await FlutterEmailSender.send(email);
+  } catch (error) {
+    (BuildContext context) {
+      return showDialog(
+        context: context,
+        builder: (context) => Dialog(
+          child: SizedBox(
+            height: 240,
+            width: 100,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                        '죄송합니다.\n\n기본 메일 앱을 사용할 수 없기 때문에\n앱에서 바로 문의를 전송하기가\n어려운 상황입니다.\n\n불편을 드려 죄송합니다.',
+                        style: TextStyle(fontSize: 16)),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Center(
+                      child: TextButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('확인'),
+                      ),
+                    ),
+                  ]),
+            ),
+          ),
+        ),
+      );
+    };
   }
 }
