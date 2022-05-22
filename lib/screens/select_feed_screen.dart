@@ -20,9 +20,11 @@ class SelectFeedScreen extends StatelessWidget {
         backgroundColor: Colors.white,
         elevation: 0,
         automaticallyImplyLeading: false,
+        centerTitle: false,
         title: Row(
           children: [
             Container(
+              padding: const EdgeInsets.symmetric(vertical: 8.0),
               height: 56,
               width: 56,
               decoration: const BoxDecoration(
@@ -31,37 +33,39 @@ class SelectFeedScreen extends StatelessWidget {
                 ),
                 color: Colors.white,
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: ExtendedImage.network(
-                  selectMap['ic_link'],
-                  cache: true,
-                ),
+              child: ExtendedImage.network(
+                selectMap['ic_link'],
+                cache: true,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8),
-              child: TextButton(
-                onPressed: () {
-                  officeList = controller.postList
-                      .where(
-                        (element) => element.toString().contains(
-                              selectMap['office_id'],
-                            ),
-                      )
-                      .toList();
-                  Get.toNamed(
-                    "/office",
-                  );
-                },
-                child: Text(
-                  selectMap['design_office'],
-                  style: const TextStyle(
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+            Expanded(
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: TextButton(
+                    onPressed: () {
+                      officeList = controller.postList
+                          .where(
+                            (element) => element.toString().contains(
+                                  selectMap['office_id'],
+                                ),
+                          )
+                          .toList();
+                      Get.toNamed(
+                        "/office",
+                      );
+                    },
+                    child: Text(
+                      selectMap['design_office'],
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                  overflow: TextOverflow.ellipsis,
                 ),
               ),
             ),
@@ -69,7 +73,7 @@ class SelectFeedScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
-            padding: const EdgeInsets.only(right: 8),
+            padding: const EdgeInsets.only(right: 16),
             child: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -84,9 +88,9 @@ class SelectFeedScreen extends StatelessWidget {
       ),
       body: SingleChildScrollView(
         scrollDirection: Axis.vertical,
-        child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        child: Column(children: [
           Padding(
-            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: Center(
               child: GestureDetector(
                 onTap: () {
@@ -94,7 +98,7 @@ class SelectFeedScreen extends StatelessWidget {
                 },
                 child: ExtendedImage.network(
                   selectMap['image_link'],
-                  fit: BoxFit.contain,
+                  fit: BoxFit.cover,
                   cache: true,
                   width: context.width,
                   shape: BoxShape.rectangle,
@@ -105,49 +109,65 @@ class SelectFeedScreen extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(
+            height: 8.0,
+          ),
           Padding(
-            padding: const EdgeInsets.only(left: 16.0),
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
             child: Row(children: [
               const Icon(Icons.location_on),
               const SizedBox(
                 width: 8,
               ),
-              Text(
-                selectMap['location'],
-                overflow: TextOverflow.ellipsis,
+              Expanded(
+                child: Text(
+                  selectMap['location'],
+                  overflow: TextOverflow.ellipsis,
+                ),
               )
             ]),
           ),
-          ListTile(
-              leading: Padding(
-                padding: const EdgeInsets.only(left: 32.0),
-                child: Text(
-                  selectMap['project_name'],
-                  overflow: TextOverflow.ellipsis,
-                ),
-              ),
-              trailing:
-                  //북마크 저장
-                  Obx(
-                () => IconButton(
-                  onPressed: () {
-                    if (controller.bookMark
-                        .toString()
-                        .contains(selectMap['id'])) {
-                      controller.bookMark.remove(selectMap);
-                      Hive.box('BookMark').put('BookMark', controller.bookMark);
-                    } else {
-                      controller.bookMark.add(selectMap);
-                      Hive.box('BookMark').put('BookMark', controller.bookMark);
-                    }
-                  },
-                  icon: controller.bookMark.toString().contains(selectMap['id'])
-                      ? const Icon(Icons.bookmark, color: Colors.red)
-                      : const Icon(
-                          Icons.bookmark_border,
-                        ),
-                ),
-              )),
+          Padding(
+            padding: const EdgeInsets.fromLTRB(48, 0, 8, 0),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: Text(
+                    selectMap['project_name'],
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ), //북마크 저장
+                Obx(
+                  () => Padding(
+                    padding: const EdgeInsets.only(right: 16.0),
+                    child: IconButton(
+                      onPressed: () {
+                        if (controller.bookMark
+                            .toString()
+                            .contains(selectMap['id'])) {
+                          controller.bookMark.remove(selectMap);
+                          Hive.box('BookMark')
+                              .put('BookMark', controller.bookMark);
+                        } else {
+                          controller.bookMark.add(selectMap);
+                          Hive.box('BookMark')
+                              .put('BookMark', controller.bookMark);
+                        }
+                      },
+                      icon: controller.bookMark
+                              .toString()
+                              .contains(selectMap['id'])
+                          ? const Icon(Icons.bookmark, color: Colors.red)
+                          : const Icon(
+                              Icons.bookmark_border,
+                            ),
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
           //태그 배열
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16),

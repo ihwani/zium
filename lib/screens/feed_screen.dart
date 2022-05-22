@@ -55,6 +55,7 @@ class FeedScreen extends StatelessWidget {
                                   padding:
                                       const EdgeInsets.fromLTRB(16, 8, 16, 4),
                                   child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Container(
                                         height: 36,
@@ -70,33 +71,39 @@ class FeedScreen extends StatelessWidget {
                                           cache: true,
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 8),
-                                        child: TextButton(
-                                          onPressed: () {
-                                            officeList = controller.postList
-                                                .where(
-                                                  (element) => element
-                                                      .toString()
-                                                      .contains(
-                                                        controller
-                                                                .postList[index]
-                                                            ['office_id'],
-                                                      ),
-                                                )
-                                                .toList();
-                                            Get.toNamed(
-                                              "/office",
-                                            );
-                                          },
-                                          child: Text(
-                                            controller.postList[index]
-                                                ['design_office'],
-                                            style: const TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 16),
-                                            overflow: TextOverflow.ellipsis,
+                                      Expanded(
+                                        child: Align(
+                                          alignment: Alignment.centerLeft,
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: TextButton(
+                                              onPressed: () {
+                                                officeList = controller.postList
+                                                    .where(
+                                                      (element) => element
+                                                          .toString()
+                                                          .contains(
+                                                            controller.postList[
+                                                                    index]
+                                                                ['office_id'],
+                                                          ),
+                                                    )
+                                                    .toList();
+                                                Get.toNamed(
+                                                  "/office",
+                                                );
+                                              },
+                                              child: Text(
+                                                controller.postList[index]
+                                                    ['design_office'],
+                                                style: const TextStyle(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 16),
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
                                           ),
                                         ),
                                       ),
@@ -104,8 +111,8 @@ class FeedScreen extends StatelessWidget {
                                   ),
                                 ),
                                 Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
                                   child: GestureDetector(
                                     onTap: () {
                                       selectMap = controller.postList[index];
@@ -119,60 +126,75 @@ class FeedScreen extends StatelessWidget {
                                     ),
                                   ),
                                 ),
+                                const SizedBox(
+                                  height: 8.0,
+                                ),
                                 Padding(
-                                  padding: const EdgeInsets.only(left: 16.0),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 8.0),
                                   child: Row(
                                     children: [
                                       const Icon(Icons.location_on),
                                       const SizedBox(
-                                        width: 8,
+                                        width: 4,
                                       ),
-                                      Text(
-                                        controller.postList[index]['location'],
-                                        overflow: TextOverflow.ellipsis,
+                                      Expanded(
+                                        child: Text(
+                                          controller.postList[index]
+                                              ['location'],
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       )
                                     ],
                                   ),
                                 ),
-                                ListTile(
-                                  leading: Padding(
-                                    padding: const EdgeInsets.only(left: 32.0),
-                                    child: Text(
-                                      controller.postList[index]
-                                          ['project_name'],
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                  trailing:
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(36, 0, 8, 0),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Expanded(
+                                        child: Text(
+                                          controller.postList[index]
+                                              ['project_name'],
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                      ),
                                       //북마크 저장
                                       Obx(
-                                    () => IconButton(
-                                      onPressed: () {
-                                        if (controller.bookMark
-                                            .toString()
-                                            .contains(controller.postList[index]
-                                                ['id'])) {
-                                          controller.bookMark.remove(
-                                              controller.postList[index]);
-                                          Hive.box('BookMark').put(
-                                              'BookMark', controller.bookMark);
-                                        } else {
-                                          controller.bookMark
-                                              .add(controller.postList[index]);
-                                          Hive.box('BookMark').put(
-                                              'BookMark', controller.bookMark);
-                                        }
-                                      },
-                                      icon: controller.bookMark
-                                              .toString()
-                                              .contains(controller
-                                                  .postList[index]['id'])
-                                          ? const Icon(Icons.bookmark,
-                                              color: Colors.red)
-                                          : const Icon(
-                                              Icons.bookmark_border,
-                                            ),
-                                    ),
+                                        () => IconButton(
+                                          onPressed: () {
+                                            if (controller.bookMark
+                                                .toString()
+                                                .contains(controller
+                                                    .postList[index]['id'])) {
+                                              controller.bookMark.remove(
+                                                  controller.postList[index]);
+                                              Hive.box('BookMark').put(
+                                                  'BookMark',
+                                                  controller.bookMark);
+                                            } else {
+                                              controller.bookMark.add(
+                                                  controller.postList[index]);
+                                              Hive.box('BookMark').put(
+                                                  'BookMark',
+                                                  controller.bookMark);
+                                            }
+                                          },
+                                          icon: controller.bookMark
+                                                  .toString()
+                                                  .contains(controller
+                                                      .postList[index]['id'])
+                                              ? const Icon(Icons.bookmark,
+                                                  color: Colors.red)
+                                              : const Icon(
+                                                  Icons.bookmark_border,
+                                                ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                                 //태그 배열
