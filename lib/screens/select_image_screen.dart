@@ -14,7 +14,7 @@ class SelectImageScreen extends StatelessWidget {
           child: GestureDetector(
             onTap: () => Navigator.of(context).pop(),
             child: InteractiveViewer(
-              maxScale: 2,
+              maxScale: 5,
               child: Container(
                 width: context.width,
                 height: context.height,
@@ -22,6 +22,7 @@ class SelectImageScreen extends StatelessWidget {
                 child: ExtendedImage.network(
                   selectMap['image_link'],
                   cache: true,
+                  fit: BoxFit.contain,
                 ),
               ),
             ),

@@ -82,8 +82,10 @@ class _SearchScreenState extends State<SearchScreen> {
                 child: FadeInAnimation(
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed('/select',
-                          arguments: {"select": keywordList[index]});
+                      selectMap = keywordList[index];
+                      Get.toNamed(
+                        '/select',
+                      );
                     },
                     child: ExtendedImage.network(
                       keywordList[index]['image_link'],

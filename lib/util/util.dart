@@ -1,4 +1,3 @@
-import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
 import 'package:hive/hive.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -28,11 +27,11 @@ Future onRefresh(c) async {
 
 //전화걸기
 // ignore: avoid_types_as_parameter_names
-Future callNumber(num) async {
-  final number = num;
-  // ignore: unused_local_variable
-  bool? res = await FlutterPhoneDirectCaller.callNumber(number);
-}
+// Future callNumber(num) async {
+//   final number = num;
+//   // ignore: unused_local_variable
+//   bool? res = await FlutterPhoneDirectCaller.callNumber(number);
+// }
 
 //내부저장소 로드
 getSaveData(a, b) {

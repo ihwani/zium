@@ -227,10 +227,10 @@ class OfficeScreen extends StatelessWidget {
                 alignment: Alignment.centerLeft,
                 child: TextButton(
                   onPressed: () {
-                    String _num = _officeData['phone_number'];
-                    _num = _num.replaceAll(")", "");
-                    _num = _num.replaceAll("-", "");
-                    callNumber(_num);
+                    // String _num = _officeData['phone_number'];
+                    // _num = _num.replaceAll(")", "");
+                    // _num = _num.replaceAll("-", "");
+                    // callNumber(_num);
                   },
                   child: Text(
                     _officeData['phone_number'],
