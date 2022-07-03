@@ -1,3 +1,5 @@
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:zium/getx/getx_controller.dart';
@@ -7,7 +9,6 @@ import 'package:zium/screens/feed_screen.dart';
 import 'package:zium/screens/office_screen.dart';
 import 'package:zium/screens/search_screen.dart';
 import 'package:zium/screens/select_feed_screen.dart';
-import 'package:zium/screens/select_image_screen.dart';
 import 'package:zium/screens/support_screen.dart';
 import 'package:get/get.dart';
 import 'package:zium/screens/tag_screen.dart';
@@ -19,6 +20,9 @@ import 'package:zium/util/util.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await initialization(null);
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     GetMaterialApp(
       initialRoute: '/',
@@ -30,7 +34,6 @@ void main() async {
         GetPage(name: '/office', page: () => OfficeScreen()),
         GetPage(name: '/tag', page: () => TagScreen()),
         GetPage(name: '/bookmark', page: () => const BookmarkScreen()),
-        GetPage(name: '/select_image', page: () => const SelectImageScreen()),
       ],
       debugShowCheckedModeBanner: false,
       title: 'Zium',

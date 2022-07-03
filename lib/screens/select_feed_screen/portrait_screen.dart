@@ -21,7 +21,7 @@ class PortraitScreen extends StatelessWidget {
           child: Center(
             child: GestureDetector(
               onTap: () {
-                Get.toNamed('select_image');
+                launchURL(selectMap['project_link']);
               },
               child: ExtendedImage.network(
                 selectMap['image_link'],

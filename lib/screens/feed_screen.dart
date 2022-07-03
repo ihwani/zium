@@ -96,7 +96,8 @@ class FeedScreen extends StatelessWidget {
                                               },
                                               child: Text(
                                                 controller.postList[index]
-                                                    ['design_office'],
+                                                        ['design_office']
+                                                    .toString(),
                                                 style: const TextStyle(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.bold,
@@ -115,8 +116,8 @@ class FeedScreen extends StatelessWidget {
                                       horizontal: 8.0),
                                   child: GestureDetector(
                                     onTap: () {
-                                      selectMap = controller.postList[index];
-                                      Get.toNamed('select_image');
+                                      launchURL(controller.postList[index]
+                                          ['project_link']);
                                     },
                                     child: ExtendedImage.network(
                                       controller.postList[index]['image_link'],
@@ -140,8 +141,8 @@ class FeedScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          controller.postList[index]
-                                              ['location'],
+                                          controller.postList[index]['location']
+                                              .toString(),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       )
@@ -158,7 +159,8 @@ class FeedScreen extends StatelessWidget {
                                       Expanded(
                                         child: Text(
                                           controller.postList[index]
-                                              ['project_name'],
+                                                  ['project_name']
+                                              .toString(),
                                           overflow: TextOverflow.ellipsis,
                                         ),
                                       ),
@@ -235,7 +237,8 @@ class FeedScreen extends StatelessWidget {
                                               child: Text(
                                                 '# ' +
                                                     controller.postList[index]
-                                                        ['tag'][idx],
+                                                            ['tag'][idx]
+                                                        .toString(),
                                                 style: const TextStyle(
                                                     color: Colors.black),
                                               ),
@@ -267,8 +270,7 @@ class FeedScreen extends StatelessWidget {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(controller.scrollController.value,
-                controller.scrollController.value.offset ~/ 10);
+            controller.scrollToTop(controller.scrollController.value, 375);
           },
           backgroundColor: Colors.white,
           elevation: 2,

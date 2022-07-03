@@ -106,8 +106,7 @@ class _SearchScreenState extends State<SearchScreen> {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(controller.scrollController.value,
-                controller.scrollController.value.offset ~/ 10);
+            controller.scrollToTop(controller.scrollController.value, 375);
           },
           backgroundColor: Colors.white,
           elevation: 2,

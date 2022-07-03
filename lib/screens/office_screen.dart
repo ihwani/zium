@@ -290,8 +290,7 @@ class OfficeScreen extends StatelessWidget {
         width: 30,
         child: FloatingActionButton(
           onPressed: () {
-            controller.scrollToTop(
-                _scrollController, _scrollController.offset ~/ 10);
+            controller.scrollToTop(_scrollController, 375);
           },
           backgroundColor: Colors.white,
           elevation: 2,

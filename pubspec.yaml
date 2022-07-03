@@ -29,6 +29,7 @@ environment:
 dependencies:
   cupertino_icons: ^1.0.4
   extended_image: ^6.2.0
+  firebase_core: ^1.18.0
   flutter:
     sdk: flutter
   flutter_email_sender: ^5.1.0
